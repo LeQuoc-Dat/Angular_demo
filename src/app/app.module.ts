@@ -1,6 +1,3 @@
-import {HttpClient} from '@angular/common/http'
-import {NgModule} from '@angular/core'
+import { provideHttpClient } from "@angular/common/http";
 
-@NgModule({})
-
-export class AppModule{}
+provideHttpClient()

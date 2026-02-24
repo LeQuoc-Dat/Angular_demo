@@ -1,20 +1,27 @@
 
      <div class="content">
-        <form class="login_form" >
+        <form class="login_form" #loginForm = "ngForm" (ngSubmit)="onLogin(loginForm)" >
             <h1>Login</h1>
             <table>
                 <tbody>
                     <tr>
-                    <td><div class="login_form_item">
-                        <input type="text"  required>
-                        <label>Username</label>
+                    <td><div class="login_form_item" >
+                        <input name="username" type="text" ngModel required #username ='ngModel'>
+                        <label>Username @if(username.invalid)
+                            {
+                                <span>*</span>
+                            }
+                        </label>
                     </div>
                     </td>
                 </tr>
                   <tr>
                     <td><div class="login_form_item">
-                        <input type="password" required>
-                        <label>Password</label>
+                        <input type="password" input name="password" ngModel required #password ='ngModel'>
+                        <label>Password @if(password.invalid)
+                            {
+                                <span>*</span>
+                            }</label>
                     </div>
                     </td>
                 </tr>

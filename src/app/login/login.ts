@@ -10,9 +10,4 @@ import {Component } from '@angular/core';
 export class Login {
   username =''
   password =''
-  onLogin()
-  {
-    
-
-  }
 }

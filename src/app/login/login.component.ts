@@ -16,26 +16,21 @@ export class LoginComponent {
   private authService = inject(AuthService)
   onLogin(f: NgForm):void
   {
-    if (f.valid)
+    if(f.invalid)
     {
-      this.authService.login(f.value.username, f.value.password).subscribe(
+      return;
+    }
+    this.authService.login(f.value.username, f.value.password).subscribe(
+      {
+        next: (res) =>
         {
-          next: (res) =>
-          {
-            this.router.navigate(['home'])
-            alert('Login Suggest!')
-          },
-          error: (err) =>
-          {
-            alert('Login failed: username or password is incorrect!')
-          }
+          this.router.navigate(['home'])
+          alert('Login Suggest!')
+        },
+        error: (err) =>
+        {
+          alert('Login failed: username or password is incorrect!')
         }
-      )
-    }
-    else
-    {
-      alert('Fill username and password before submit')
-    }
-    
+      })
   }
 }

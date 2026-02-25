@@ -82,7 +82,7 @@ button
 }
 
 .login_form_item input:focus~label, input:valid~label{
-    top:0px;
+    top:5px;
     left: 4px;
     font-size: 8px;
 }

@@ -1,16 +1,15 @@
 import {Component, inject} from '@angular/core';
 import {AuthService} from '../auth.service'
-import {NgForm,  FormsModule} from '@angular/forms'
-import { Router, RouterModule, Route } from '@angular/router';
-import { error } from 'console';
+import {NgForm} from '@angular/forms'
+import { Router } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  styleUrls: ['./login.component.css'],
+  standalone:false
 })
 export class LoginComponent {
   private router= inject(Router)

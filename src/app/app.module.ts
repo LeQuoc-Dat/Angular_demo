@@ -1,3 +1,11 @@
-import { provideHttpClient } from "@angular/common/http";
+import { bootstrapApplication } from "@angular/platform-browser";
+import { provideHttpClient, withFetch } from "@angular/common/http";
+import { AppComponent } from "./app.component";
 
-provideHttpClient()
+
+bootstrapApplication(AppComponent, {
+    providers: [
+        provideHttpClient(withFetch()),
+    ]
+})
+

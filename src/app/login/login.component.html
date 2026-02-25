@@ -1,27 +1,46 @@
 
      <div class="content">
-        <form class="login_form" #loginForm = "ngForm" (ngSubmit)="onLogin(loginForm)" >
+        <form   class="login_form" #loginForm = "ngForm" (ngSubmit)="onLogin(loginForm)" >
             <h1>Login</h1>
             <table>
                 <tbody>
                     <tr>
                     <td><div class="login_form_item" >
-                        <input name="username" type="text" ngModel required #username ='ngModel'>
-                        <label>Username @if(username.invalid)
+                        <input name="username" minlength="4" type="text" ngModel required #username ='ngModel' placeholder="">
+                        <label> Username
+                             @if(username.invalid&&username.touched&&username.dirty||loginForm.submitted&&username.invalid)
                             {
-                                <span>*</span>
+                                @if(username.errors?.['required'])
+                                {
+                                    (Username is required)
+                                }
+                                @if(username.errors?.['minlength'])
+                                {
+                                    (Username is invalid)
+                                }
                             }
+                            
                         </label>
+                        
                     </div>
                     </td>
                 </tr>
                   <tr>
                     <td><div class="login_form_item">
-                        <input type="password" input name="password" ngModel required #password ='ngModel'>
-                        <label>Password @if(password.invalid)
+                        <input type="password" minlength="4" name="password" ngModel required #password ='ngModel'>
+                        <label>Password
+                         @if(password.invalid&&password.touched&&password.dirty||loginForm.submitted&&password.invalid)
                             {
-                                <span>*</span>
-                            }</label>
+                                @if(password.errors?.['required'])
+                                {
+                                    (Password is required)
+                                }
+                                @if(password.errors?.['minlength'])
+                                {
+                                    (Password is invalid)
+                                }
+                            }
+                        </label>
                     </div>
                     </td>
                 </tr>

@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
-import {AuthService} from '../auth.service'
+import {AuthService} from '../auth/auth.service'
 import {NgForm} from '@angular/forms'
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 
 
@@ -24,8 +24,8 @@ export class LoginComponent {
       {
         next: (res) =>
         {
-          this.router.navigate(['home'])
           alert('Login Suggest!')
+          this.router.navigate(['home'])
         },
         error: (err) =>
         {

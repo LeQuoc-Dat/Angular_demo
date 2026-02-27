@@ -27,7 +27,7 @@
                 </tr>
                   <tr>
                     <td><div class="login_form_item">
-                        <input type="password" minlength="4" name="password" ngModel required #password ='ngModel'>
+                        <input type="password" minlength="4" name="password" placeholder="" ngModel required #password ='ngModel'>
                         <label>Password
                          @if(password.invalid&&password.touched&&password.dirty||loginForm.submitted&&password.invalid)
                             {

@@ -55,14 +55,12 @@ export class AuthService{
             )
         )
     }
-    public isAuthenticated(): boolean
+    public isAuthenticated(): Observable<boolean>
     {
-        const token = this.authState.getToken()
-        
-        if (!token)
-        {
-            return false
-        }
-        return !this.jwtHelper.isTokenExpired(token)
+        console.log(this.authState.token$)
+        return this.authState.token$.pipe(
+            map(token => !!token && !this.jwtHelper.isTokenExpired(token)),
+            take(1)
+        )
     }
 }

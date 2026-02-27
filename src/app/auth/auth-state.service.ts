@@ -5,7 +5,10 @@ import {BehaviorSubject} from "rxjs";
 @Injectable({providedIn:'root'})
 export class AuthStateService {
     private tokenSubject = new BehaviorSubject<string|null>(null)
-    private user = new BehaviorSubject<any|null>(null)
+    private userSubject = new BehaviorSubject<any|null>(null)
+    public token$ = this.tokenSubject.asObservable();
+    public user$ = this.userSubject.asObservable();
+    
 
     constructor( @Inject(PLATFORM_ID) private plaformId: Object,)
     {
@@ -32,7 +35,7 @@ export class AuthStateService {
         const savedUser = localStorage.getItem('User')
         if(savedUser)
         {
-            this.user.next(JSON.parse(savedUser))
+            this.userSubject.next(JSON.parse(savedUser))
         }
         }
       }
@@ -43,7 +46,7 @@ export class AuthStateService {
             return
         }
         localStorage.setItem('User', JSON.stringify(userInfo))
-        this.user.next(userInfo)
+        this.userSubject.next(userInfo)
       }
       removeUserInfo()
       {
@@ -52,7 +55,7 @@ export class AuthStateService {
             return
         }
         localStorage.removeItem('User')
-        this.user.next(null)
+        this.userSubject.next(null)
       }
       getUser()
       {
@@ -60,7 +63,7 @@ export class AuthStateService {
         {
             return null
         }
-        return this.user.value
+        return this.userSubject.value
       }
 
     setToken(token:string)

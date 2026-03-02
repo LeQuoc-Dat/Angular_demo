@@ -1,8 +1,7 @@
 import { inject } from '@angular/core'
-import {Routes, CanActivateFn, Router} from '@angular/router'
+import {CanActivateFn, Router,  ActivatedRouteSnapshot, Routes} from '@angular/router'
 import { AuthService } from './auth/auth.service' 
 import { LoginComponent } from './login/login.component'
-import { map } from 'rxjs'
 
 
 const authGuard: CanActivateFn = () =>
@@ -15,6 +14,25 @@ const authGuard: CanActivateFn = () =>
     }
 
     return true
+}
+
+
+
+const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) =>
+{
+    const auth = inject(AuthService)
+    const router = inject(Router)
+    const expectedRole = route.data['expectedRole']
+    if (!auth.isAuthenticated())
+    {
+        return router.createUrlTree(['login'])
+    }
+    if (!auth.checkUserRole(expectedRole))
+    {
+        return false
+    }
+    return true
+
 }
 
 
@@ -41,7 +59,7 @@ export const routes: Routes =[
         path:'admin',
         loadComponent: ()=>import('./admin/admin.component').then(m=>m.AdminComponent),
         title: 'Admin Page',
-        canActivate: [],
+        canActivate: [roleGuard],
         data: {
             expectedRole: 'admin'
         }

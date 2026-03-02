@@ -3,6 +3,7 @@ import {JwtHelperService} from '@auth0/angular-jwt'
 import {HttpClient} from '@angular/common/http'
 import {Observable,BehaviorSubject, tap, filter, take, map} from 'rxjs'
 import { AuthStateService as AuthState } from './auth-state.service'
+import { ActivatedRouteSnapshot} from '@angular/router';
 
 export interface LoginResponse
 {
@@ -34,7 +35,7 @@ export class AuthService{
                 this.getUser().subscribe({
                     next: (res) =>
                     {
-                        console.log(this.authState.getUser())
+                        console.log(this.isAuthenticated())
                     },
                     error: (err) =>
                     {
@@ -57,10 +58,16 @@ export class AuthService{
     }
     public isAuthenticated(): Observable<boolean>
     {
-        console.log(this.authState.token$)
         return this.authState.token$.pipe(
             map(token => !!token && !this.jwtHelper.isTokenExpired(token)),
             take(1)
+        )
+    }
+
+    public checkUserRole(expectedRole: string): Observable<boolean>
+    {
+        return this.authState.user$.pipe(
+            map(user => user.role === expectedRole)
         )
     }
 }

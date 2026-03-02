@@ -8,7 +8,7 @@
                     <td><div class="login_form_item" >
                         <input name="username" minlength="4" type="text" ngModel required #username ='ngModel' placeholder="">
                         <label> Username
-                             @if(username.invalid&&username.touched&&username.dirty||loginForm.submitted&&username.invalid)
+                             @if(controlHasError('required', 'minlength', 'username', loginForm))
                             {
                                 @if(username.errors?.['required'])
                                 {
@@ -29,7 +29,7 @@
                     <td><div class="login_form_item">
                         <input type="password" minlength="4" name="password" placeholder="" ngModel required #password ='ngModel'>
                         <label>Password
-                         @if(password.invalid&&password.touched&&password.dirty||loginForm.submitted&&password.invalid)
+                         @if(controlHasError('required', 'minlength','password', loginForm))
                             {
                                 @if(password.errors?.['required'])
                                 {

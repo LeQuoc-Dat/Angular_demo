@@ -1,8 +1,10 @@
 import { inject } from '@angular/core'
 import {CanActivateFn, Router,  ActivatedRouteSnapshot, Routes} from '@angular/router'
-import { AuthService } from './auth/auth.service' 
-import { LoginComponent } from './login/login.component'
-
+import { AuthService } from './core/services/auth.service' 
+import { LoginComponent } from './auth/login/login.component'
+import { HomeComponent } from './home/home.component'
+import { AdminComponent } from './admin/admin.component'
+import { AboutComponent } from './about/about.component'
 
 const authGuard: CanActivateFn = () =>
 {
@@ -51,13 +53,13 @@ export const routes: Routes =[
     },
     {
         path:'home',
-        loadComponent: ()=> import('./home/home.component').then(m => m.HomeComponent),
+        component: HomeComponent,
         title: 'Home Page',
         canActivate: [authGuard]
     },
     {
         path:'admin',
-        loadComponent: ()=>import('./admin/admin.component').then(m=>m.AdminComponent),
+        component: AdminComponent,
         title: 'Admin Page',
         canActivate: [roleGuard],
         data: {
@@ -66,7 +68,7 @@ export const routes: Routes =[
     },
     {
         path:'about',
-        loadComponent: ()=>import('./about/about.component').then(m => m.AboutComponent),
+        component: AboutComponent,
         title: 'About',
         canActivate: [authGuard]
     }

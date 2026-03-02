@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {AuthService} from '../auth/auth.service'
+import {AuthService} from '../../core/services/auth.service'
 import {NgForm} from '@angular/forms'
 import {Router} from '@angular/router';
 
@@ -14,13 +14,13 @@ import {Router} from '@angular/router';
 export class LoginComponent {
   private router= inject(Router)
   private authService = inject(AuthService)
-  onLogin(f: NgForm):void
+  onLogin(form: NgForm):void
   {
-    if(f.invalid)
+    if(form.invalid)
     {
       return;
     }
-    this.authService.login(f.value.username, f.value.password).subscribe(
+    this.authService.login(form.value.username, form.value.password).subscribe(
       {
         next: (res) =>
         {
@@ -32,5 +32,11 @@ export class LoginComponent {
           alert('Login failed: username or password is incorrect!')
         }
       })
+  }
+
+  controlHasError(validation_1: string,validation_2: string, controlName: string, form: NgForm)
+  {
+    const control = form.controls[controlName]
+    return (control?.hasError(validation_1)|| control?.hasError(validation_2)) && (control.dirty || control.touched)
   }
 }

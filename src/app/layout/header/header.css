@@ -1,0 +1,125 @@
+header
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info_container
+{
+    color: rgb(152, 140, 140);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 30px;
+    border-bottom: 1px solid;
+    width: 70rem;
+}
+.info_container_item
+{
+    display: flex;
+    gap: 7px;
+}
+
+.country_selector, .currency_selector
+{
+    cursor: pointer;
+}
+
+.dashboard_navbar_container
+{
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    width: 70rem;
+    height: 7rem;
+}
+
+
+.dashboard_logo 
+{
+    color: red;
+}
+
+.dashboard_logo span
+{
+    color: black;
+}
+
+.dashboard_logo h4
+{
+    font-size: 10px;
+}
+
+.dashboard_link_container
+{
+    display: flex;
+    gap: 20px;
+}
+
+.btn_cart
+{
+    display: flex;
+    align-items: center;
+    height: 50px;
+}
+
+.btn_cart_logo
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 100%;
+    background-color: red;
+    color: white;
+}
+
+.btn_cart_status_display
+{
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.search_tool_container
+{
+    display: flex;
+    width: 70rem;
+    justify-content: space-between;
+}
+
+.dashboard_searchbar
+{
+    width: 40rem;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+
+}
+
+.categories_selector
+{
+    width: 200px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    padding: 0 10px;
+    background-color: red;
+    color: white;
+}
+.dashboard_searchbar input
+{
+   width: 100%;
+   padding: 0 10px;
+}
+
+.dashboard_searchbar button
+{
+    background-color: red;
+    color: white;
+    width: 40px;
+    border: 0;
+}

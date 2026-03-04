@@ -1,0 +1,131 @@
+footer
+{
+    background-color: var(--bg_plain_color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input:focus
+{
+    outline: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+
+.footer_header
+{
+    border-top: 1px solid var(--line_color);
+    border-bottom: 1px solid var(--line_color);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.footer_header_content_wrap
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.frm_mail
+{
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+
+.frm_mail input
+{
+    border: 1px solid var(--line_color);
+    width: 400px;
+    height: 40px;
+    padding: 0 10px;
+    font-size: 16px;
+}
+
+.frm_mail button
+{
+    border: 1px solid var(--line_color);
+    width: 100px;
+    background-color: var(--btn_color);
+    color: var(--highlight_text_color);
+    cursor: pointer;
+}
+
+.frm_mail button:hover
+{
+    background-color: var(--highlight_btn_color);
+}
+.frm_mail button, input
+{
+    border-radius: 5px;
+}
+
+.footer_content
+{
+    padding: 50px 0px;
+    width: var(--config_width);
+    display: flex;
+    justify-content: space-between;
+}
+.footer_content_item
+{
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.footer_content_item span
+{
+    color: var(--text_plain_color) ;
+}
+
+
+.footer_content_item div
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 190px;
+}
+
+.footer_footer
+{
+    width: var(--config_width);
+}
+
+.social_paymnent_container, .end_line
+{
+    padding: 20px 0;
+    border-top: 1px solid var(--line_color);
+}
+
+.social_paymnent_container
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social_paymnent_links_container
+{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.social_paymnent_links_container div
+{
+    display: flex;
+    gap: 8px;
+}
+.social_paymnent_links_container span
+{
+    font-weight: bold;
+}

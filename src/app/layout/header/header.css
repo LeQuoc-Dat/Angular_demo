@@ -4,16 +4,24 @@ header
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-bottom: 20px;
 }
 .info_container
 {
-    color: rgb(152, 140, 140);
+    color: var(--text_plain_color);
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     height: 30px;
-    border-bottom: 1px solid;
-    width: 70rem;
+    border-bottom: 1px solid var(--line_color);
+    width: 100%;
+}
+
+.info_item_wrap
+{
+    display: flex;
+    justify-content: space-between;
+    width: var(--config_width);
 }
 .info_container_item
 {
@@ -26,24 +34,28 @@ header
     cursor: pointer;
 }
 
-.dashboard_navbar_container
+.dashboard_navbar_container 
 {
     justify-content: space-between;
     align-items: center;
     display: flex;
-    width: 70rem;
+    width: var(--config_width);
     height: 7rem;
 }
 
+.dashboard_navbar_container a
+{
+    color: var(--text_color);
+}
 
 .dashboard_logo 
 {
-    color: red;
+    color: var(--highlight_btn_color);
 }
 
 .dashboard_logo span
 {
-    color: black;
+    color: var(--text_color);
 }
 
 .dashboard_logo h4
@@ -62,6 +74,21 @@ header
     display: flex;
     align-items: center;
     height: 50px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn_cart:hover
+{
+    border: 1px solid var(--line_color);
+    color: var(--highlight_btn_color);
+   
+}
+
+.btn_cart:hover .btn_cart_logo
+{
+    background-color: var(--bg_color);
+    color: var(--highlight_btn_color);
 }
 
 .btn_cart_logo
@@ -71,27 +98,36 @@ header
     justify-content: center;
     width: 50px;
     height: 100%;
-    background-color: red;
-    color: white;
+    background-color: var(--highlight_btn_color);
+    border-top-left-radius: 5px ;
+    border-bottom-left-radius: 5px ;
+    color: var(--highlight_text_color);
 }
 
 .btn_cart_status_display
 {
+    font-weight: lighter;
     padding: 0 5px;
     display: flex;
     flex-direction: column;
 }
+.btn_cart_status_display span
+{
+    color: var(--text_plain_color);
+}
+
+
 
 .search_tool_container
 {
     display: flex;
-    width: 70rem;
+    width: var(--config_width);
     justify-content: space-between;
 }
 
 .dashboard_searchbar
 {
-    width: 40rem;
+    width: 44rem;
     height: 40px;
     display: flex;
     flex-direction: row;
@@ -101,25 +137,44 @@ header
 
 .categories_selector
 {
+    cursor: pointer;
     width: 200px;
     height: 40px;
     display: flex;
     align-items: center;
     border: 1px solid;
     padding: 0 10px;
-    background-color: red;
-    color: white;
+    background-color: var(--highlight_btn_color);
+    color: var(--highlight_text_color);
 }
 .dashboard_searchbar input
 {
    width: 100%;
    padding: 0 10px;
+   border: 1px solid var(--highlight_btn_color);
 }
 
 .dashboard_searchbar button
 {
-    background-color: red;
-    color: white;
-    width: 40px;
+    background-color: var(--highlight_btn_color);
+    color: var(--highlight_text_color);
+    width: 45px;
+    font-size: 20px;
     border: 0;
+    cursor: pointer;
+}
+
+.dashboard_searchbar button:hover
+{
+    background-color: var(--btn_color);
+    color: var(--highlight_text_color);
+}
+
+input:focus
+{
+    outline: none;
+}
+
+a{
+    text-decoration: none;
 }

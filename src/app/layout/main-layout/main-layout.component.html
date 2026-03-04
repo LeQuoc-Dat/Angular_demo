@@ -1,12 +1,16 @@
+
+<div class="body">
+
 @if(!isAuthPage(router.url))
 {
     <app-header></app-header>
 }
+
 <router-outlet></router-outlet>
 
 @if(!isAuthPage(router.url))
 {
     <app-footer></app-footer>
 }
-
+</div>
 

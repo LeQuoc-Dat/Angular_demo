@@ -3,8 +3,9 @@ import {CanActivateFn, Router,  ActivatedRouteSnapshot, Routes} from '@angular/r
 import { AuthService } from './core/services/auth.service' 
 import { LoginComponent } from './auth/login/login.component'
 import { HomeComponent } from './home/home.component'
-import { AdminComponent } from './admin/admin.component'
 import { AboutComponent } from './about/about.component'
+import { ProductsComponent } from './products/products.component'
+import { CartComponent } from './cart/cart.component'
 
 const authGuard: CanActivateFn = () =>
 {
@@ -49,27 +50,30 @@ export const routes: Routes =[
     {
         path:'login',
         component: LoginComponent,
-        title:'Login Page'
+        title:'Login'
     },
     {
         path:'home',
         component: HomeComponent,
-        title: 'Home Page',
+        title: 'Home',
         canActivate: [authGuard]
-    },
-    {
-        path:'admin',
-        component: AdminComponent,
-        title: 'Admin Page',
-        canActivate: [roleGuard],
-        data: {
-            expectedRole: 'admin'
-        }
     },
     {
         path:'about',
         component: AboutComponent,
-        title: 'About',
+        title: 'About Us',
+        canActivate: [authGuard]
+    },
+    {
+        path:'cart',
+        component: CartComponent,
+        title: 'Cart',
+        canActivate: [authGuard]
+    },
+    {
+        path: 'products',
+        component: ProductsComponent,
+        title: 'Products',
         canActivate: [authGuard]
     }
 ]

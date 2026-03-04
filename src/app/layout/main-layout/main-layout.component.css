@@ -7,6 +7,7 @@
 {
   --text_color: black ;
   --text_plain_color: rgb(144, 132, 132) ;
+  --text_heavy_plain_color: rgb(94, 88, 88);
   --highlight_text_color: white;
   --bg_color: white;
   --bg_plain_color: rgb(200, 250, 250);

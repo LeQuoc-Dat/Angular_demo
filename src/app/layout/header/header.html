@@ -2,20 +2,67 @@
     <div class="info_container">
         <div class="info_item_wrap">
             <div class="info_container_item">         
-                <div class="country_selector">
-                    <P>English</P>
+                <div class="country_selector" (click)="toggleCountry()">
+                    <div>
+                        <img class="flag_icon_logo" src="assets/icons/united-kingdom-flag.png" alt="English">
+                        <P>English</P>
+                    </div>
+                    <fa-icon [icon]="iconArrowDown"></fa-icon>
+                    @if(isCountryToggled)
+                    {
+                        <div class="country_container">
+                        <div>
+                            <img class="flag_icon_logo" src="assets/icons/united-kingdom-flag.png" alt="English">
+                            English
+                        </div>
+                        <div>
+                             <img class="flag_icon_logo" src="assets/icons/vietnam-flag.png" alt="VietNam">
+                            Vietnamese
+                        </div>
+                    </div>
+                    }
+                    
                 </div>
                 |
-                <div class="currency_selector">
+                <div class="currency_selector" (click)="toggleCurrency()">
                     <p>USD</p>
+                    <fa-icon [icon]="iconArrowDown"></fa-icon>
+                    @if (isCurrencyToggled)
+                    {
+                        <div class="currency_container">
+                        <div>EUR</div>
+                        <div>VND</div>
+                        <div>USD</div>
+                    </div>
+                    }
+                    
                 </div>
             </div>
 
                 <div class="info_container_item">
-                    <div>
-                        <p>My Account</p>
+                    <div class="user_selector" (click)="toggleAccount()">
+                        <div>
+                            <fa-icon [icon]="iconUser"></fa-icon>
+                            <p>My Account</p>
+                        </div>
+                        <fa-icon [icon]="iconArrowDown"></fa-icon>
+                        @if( isAccountToggled)
+                        {
+                            <div class="account_choice">
+                                <div>
+                                    Log out
+                                </div>
+                                
+                            </div>
+                        }
+                        
                     </div>
-                    |<p>My Wishlist</p>
+                    | 
+                    <div class="user_wishlist">
+                        <fa-icon [icon]="iconHeart"></fa-icon>
+                        <p>My Wishlist</p>
+                    </div>
+                    
                 </div>
         </div>
         
@@ -39,7 +86,19 @@
     </div>
     <div class ="search_tool_container">
         <div class="categories_selector">
-            <fa-icon [icon]="iconList"></fa-icon> ALL CATEGORIES
+            <div><fa-icon [icon]="iconList"></fa-icon> ALL CATEGORIES</div> <fa-icon [icon]="iconSortDown"></fa-icon>
+            <div class="categories_container_displayer">
+                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Categories 1</div>
+                <div class="more_categories_btn">
+                    More Categories
+                </div>
+            </div>
         </div>
         <div class="dashboard_searchbar">
             <input type="text" placeholder="Enter keywords here...">

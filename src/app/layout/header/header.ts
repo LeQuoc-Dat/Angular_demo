@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {RouterModule} from '@angular/router'
+import {RouterModule, Router} from '@angular/router'
 import {faList, faMagnifyingGlass, faCartShopping} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 
@@ -11,7 +11,12 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
   styleUrls: ['./header.css'],
 })
 export class Header {
+  constructor(private route: Router){}
   iconList = faList
   iconSearch = faMagnifyingGlass
   iconCart = faCartShopping
+  onCartBtnClick()
+  {
+    this.route.navigate(['cart'])
+  }
 }

@@ -22,7 +22,7 @@
     font-size: 30px;
     padding-bottom: 10px;
     border-bottom: 3px solid var(--text_plain_color);
-    font-weight: bolder;
+    font-weight: lighter;
     width: 140px;
 }
 

@@ -8,9 +8,8 @@
                         <P>English</P>
                     </div>
                     <fa-icon [icon]="iconArrowDown"></fa-icon>
-                    @if(isCountryToggled)
-                    {
-                        <div class="country_container">
+                    
+                        <div class="country_container" [style.display]="isCountryToggled?'inline':'none'">
                         <div>
                             <img class="flag_icon_logo" src="assets/icons/united-kingdom-flag.png" alt="English">
                             English
@@ -20,21 +19,22 @@
                             Vietnamese
                         </div>
                     </div>
-                    }
+                    
                     
                 </div>
                 |
                 <div class="currency_selector" (click)="toggleCurrency()">
                     <p>USD</p>
                     <fa-icon [icon]="iconArrowDown"></fa-icon>
-                    @if (isCurrencyToggled)
-                    {
-                        <div class="currency_container">
+                        <div class="currency_container" [ngStyle]="{
+                            'display': isCurrencyToggled?'inline':'none'
+                          }">
                         <div>EUR</div>
                         <div>VND</div>
                         <div>USD</div>
                     </div>
-                    }
+                    
+
                     
                 </div>
             </div>
@@ -45,16 +45,13 @@
                             <fa-icon [icon]="iconUser"></fa-icon>
                             <p>My Account</p>
                         </div>
-                        <fa-icon [icon]="iconArrowDown"></fa-icon>
-                        @if( isAccountToggled)
-                        {
-                            <div class="account_choice">
+                        <fa-icon [icon]="iconArrowDown"></fa-icon>             
+                            <div class="account_choice" [style.display]="isAccountToggled?'inline':'none'" >
                                 <div>
                                     Log out
                                 </div>
                                 
                             </div>
-                        }
                         
                     </div>
                     | 

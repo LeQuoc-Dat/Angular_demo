@@ -4,11 +4,12 @@ import {faList, faMagnifyingGlass,
         faCartShopping, faSortDown,
         faAngleDown, faHeart, faUser} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
+import { NgStyle } from '@angular/common';
 
 
 @Component({
   selector: 'app-header',
-  imports: [FontAwesomeModule, RouterModule],
+  imports: [FontAwesomeModule, RouterModule, NgStyle],
   templateUrl: './header.html',
   styleUrls: ['./header.css'],
 })

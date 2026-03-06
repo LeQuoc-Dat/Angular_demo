@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core'
 import {JwtHelperService} from '@auth0/angular-jwt'
 import {HttpClient} from '@angular/common/http'
-import {Observable,BehaviorSubject, tap, filter, take, map} from 'rxjs'
+import {Observable, tap,take, map} from 'rxjs'
 import { AuthStateService as AuthState } from './auth-state.service'
-import { ActivatedRouteSnapshot} from '@angular/router';
 
 export interface LoginResponse
 {

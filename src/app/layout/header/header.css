@@ -274,6 +274,7 @@ a{
     color: var(--text_heavy_plain_color);
     background-color: var(--bg_color);
     visibility: hidden;
+    z-index: 200;
 }
 
 .categories_container_item

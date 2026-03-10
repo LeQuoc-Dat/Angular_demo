@@ -2,10 +2,17 @@ import {Injectable, Inject, PLATFORM_ID} from '@angular/core'
 import {isPlatformBrowser} from '@angular/common'
 import {BehaviorSubject} from "rxjs";
 
+
+interface User
+{
+    firstName : string
+    lastName:string
+    role:string
+}
 @Injectable({providedIn:'root'})
 export class AuthStateService {
     private tokenSubject = new BehaviorSubject<string|null>(null)
-    private userSubject = new BehaviorSubject<any|null>(null)
+    private userSubject = new BehaviorSubject<User|null>(null)
     public token$ = this.tokenSubject.asObservable();
     public user$ = this.userSubject.asObservable();
     

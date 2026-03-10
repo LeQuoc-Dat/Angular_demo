@@ -1,0 +1,55 @@
+<div class="main">
+    <div class="special-offer">
+        <div class="breadcrumb">
+            <div class="breadcrumb_wrap">
+                <h1>DEALS</h1>
+                 <p><a routerLink="/home">Home</a> > <span>Special Offer</span></p>
+            </div>
+        </div>
+        <div class="special-off_header">
+            <img class="special-off_header_ad_img" [src]="" [alt]="">
+            <div class="special-offer_product_categories_nav">
+                <div class="categories_nav_item">
+                    SHOW ALL
+                    <fa-icon [icon] ="iconList.iconMultiArrows"></fa-icon>
+                </div>
+                <div class="categories_nav_item">
+                    BEAUTY
+                    <fa-icon [icon]="iconList.iconShopping"></fa-icon>
+                </div>
+                <div class="categories_nav_item">
+                    ELECTRONIC
+                    <fa-icon [icon]="iconList.iconTV"></fa-icon>
+                </div>
+                <div class="categories_nav_item">
+                    FACTIONS
+                    <fa-icon [icon]="iconList.iconShirt"></fa-icon> 
+                </div>
+                <div class="categories_nav_item">
+                    FURNITURE
+                    <fa-icon [icon]="iconList.iconSofa"></fa-icon> 
+                </div>
+                <div class="categories_nav_item">
+                    OUTDOOR
+                    <fa-icon [icon]="iconList.iconTree"></fa-icon> 
+                </div>
+            </div>
+        </div>
+            <div class="special-offer_content">
+                @for (product of saleProductList; track product.id) {
+                <div class="special_offer_product_displayer">
+                    <img class="special-offer_product_img" [src]=product.images[0] [alt]=product.title>
+                    <div class="special-offer_product_info">
+                        <p>{{product.title}}</p>
+                          <strong class="special-offer_product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}
+                            <span class="original_price">${{product.price}}</span>
+                          </strong>
+                    </div>
+                </div>
+            }
+            </div>
+            <div class="special-offer_footer">
+                <div class="special-offer_pagination"></div>
+            </div>
+        </div>
+    </div>

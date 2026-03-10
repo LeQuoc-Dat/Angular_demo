@@ -1,11 +1,14 @@
 import { inject } from '@angular/core'
-import {CanActivateFn, Router,  ActivatedRouteSnapshot, Routes} from '@angular/router'
+import { CanActivateFn, Router,  ActivatedRouteSnapshot, Routes} from '@angular/router'
 import { AuthService } from './core/services/auth.service' 
 import { LoginComponent } from './auth/login/login.component'
 import { HomeComponent } from './home/home.component'
 import { AboutComponent } from './about/about.component'
 import { ProductsComponent } from './products/products.component'
 import { CartComponent } from './cart/cart.component'
+import { CategoriesComponent} from './categories/categories.component'
+import { SpecialOfferComponent} from './special-offer/special-offer.component'
+import { CollectionsComponent}from './collections/collections.component'
 
 const authGuard: CanActivateFn = () =>
 {
@@ -75,5 +78,24 @@ export const routes: Routes =[
         component: ProductsComponent,
         title: 'Products',
         canActivate: [authGuard]
+    },
+    {
+        path: 'categories',
+        component: CategoriesComponent,
+        title: 'Catergories',
+        canActivate: [authGuard]
+    },
+    {
+        path: 'special-offer',
+        component: SpecialOfferComponent,
+        title: 'Special Offer',
+        canActivate: [authGuard]
+    },
+    {
+        path: 'collections',
+        component: CollectionsComponent,
+        title: 'Collections',
+        canActivate: [authGuard]
     }
+    
 ]

@@ -5,9 +5,9 @@
                 <div class="home_header_slide">
                 </div>
                 <div class="home_header_navbar">
-                    <div>FREE SHIPPING WORLDWIDE</div>
-                    <div>MONEY BACK GUARANTEE</div>
-                    <div>ONLINE SUPPORT 24/24</div>
+                    <div><fa-icon [icon]="iconList.iconTruck"></fa-icon> SHIPPING WORLDWIDE</div>
+                    <div><fa-icon [icon]="iconList.iconMoney"></fa-icon>  MONEY BACK GUARANTEE</div>
+                    <div><fa-icon [icon]="iconList.iconUmberlla"></fa-icon> SUPPORT 24/24</div>
                 </div>
             </div>
         </div>
@@ -19,26 +19,26 @@
                     <span class="content_sudtitle">Instant Dismount on instant Purchases</span></p>
                 </div>
                 <div class="deal_of_the_days_products">
+                    @for (product of dealOfTheDayProductList; track product.id) {
                     <div class="deal_of_the_days_products_display">
                         <div class="deal_of_the_days_product_img_area">
-                            <div class="product_img_display"></div>
+                            <img class="product_img_display" [alt]=product.title [src]=product.images[0]>
                         </div>
                         <div class="deal_of_the_days_product_info">
-                            <h3>Product name</h3>
-                            <p class="product_info">Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                 Facere impedit molestias nobis aut nisi quos quibusdam dignissimos veritatis corrupti unde. Beatae eligendi excepturi,
-                                 adipisci corporis reprehenderit veniam magnam numquam odio?</p>
-                            <p><strong class="product_price">$00.00</strong><span></span></p>
+                            <h3>{{product.title}}</h3>
+                            <p class="product_info">{{product.description}}</p>
+                            <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                             <div class="user_choice_container">
                                 <button type="button">
-                                    ADD TO CART
+                                    <fa-icon [icon]="iconList.iconCart"></fa-icon>ADD TO CART
                                 </button>
                                 <div class="wishlist_btn">
-                                    Wishlist
+                                    <fa-icon [icon]="iconList.iconHeart"></fa-icon>
                                 </div>
                             </div>
                         </div>
                     </div>
+                }
                     <div></div>
                 </div>
                 <div class="deal_of_the_days_products_pagination">
@@ -57,15 +57,17 @@
                         </p>
                     </div>
                     <div class="hot_product_display">
+                        @for (product of featuredProductList; track product.id) {
                             <div class="hot_product_display_item">
-                                <div class="product_img_display"></div>
-                                <p>Product name</p>
-                                <p><strong class="product_price">$00.00</strong></p>
+                                <img class="product_img_display" [src] = product.images[0] [alt]=product.title>
+                                <p>{{product.title}}</p>
+                               <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                                 <div class="hot_product_user_choice">
-                                    <div class="add_to_cart">Cart</div>
-                                    <div class="add_to_wishlist">Wishlist</div>
+                                    <div class="add_to_cart"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
+                                    <div class="add_to_wishlist"><fa-icon [icon]="iconList.iconHeart"></fa-icon></div>
                                 </div>
                             </div>
+                        }
                     </div>
                 </div>
 
@@ -77,15 +79,17 @@
                         </p>
                     </div>
                     <div class="hot_product_display">
+                        @for (product of bestSellerProductList; track product.id) {
                             <div class="hot_product_display_item">
-                                <div class="product_img_display"></div>
-                                <p>Product name</p>
-                                <p><strong class="product_price">$00.00</strong></p>
+                                <img class="product_img_display" [src]=product.images[0] [alt]=product.title>
+                                <p>{{product.title}}</p>
+                                <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                                 <div class="hot_product_user_choice">
-                                    <div class="add_to_cart">Cart</div>
-                                    <div class="add_to_wishlist">Wishlist</div>
+                                    <div class="add_to_cart"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
+                                    <div class="add_to_wishlist"><fa-icon [icon]="iconList.iconHeart"></fa-icon></div>
                                 </div>
                             </div>
+                        }
                     </div>
 
                 </div>
@@ -105,35 +109,30 @@
                 </div>
             </div>
             <div class="new_product_conduct_container">
+                
                 <div class="new_product_conduct_container_header">
                     <p class="content_title">NEW PRODUCTS<br>
                     <span class="content_sudtitle">Instant Dismount on instant Purchases</span>
                 </div>
                 <div class="new_product_displayer">
+                    @for (product of newestProductList; track product.id) {
                     <div class="new_product_displayer_item">
-                        <div class="product_img_display"></div>
+                        <img class="product_img_display" [src]=product.images[0]  [alt]=product.title>
                         <div class="display_product_info">
-                            <p>Product name</p>
-                            <strong class="product_price">$00.00</strong>
+                            <p>{{product.title}}</p>
+                            <strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}</strong>
+                            <span class="original_price">${{product.price}}</span>
                             <div class="user_choice_container">
                                 <button type="button">
-                                    ADD TO CART
+                                    <fa-icon [icon]="iconList.iconCart"></fa-icon>  Add to cart
                                 </button>
                                 <div class="wishlist_btn">
-                                    Wishlist
+                                    <fa-icon [icon]="iconList.iconHeart"></fa-icon>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="new_product_displayer_item">
-                        
-                    </div>
-                    <div class="new_product_displayer_item">
-                        
-                    </div>
-                    <div class="new_product_displayer_item">
-                        
-                    </div>
+                }
                 </div>
             </div>
         </div>

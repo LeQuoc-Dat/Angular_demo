@@ -43,7 +43,14 @@
                     <div class="user_selector" (click)="toggleAccount()">
                         <div>
                             <fa-icon [icon]="iconUser"></fa-icon>
-                            <p>My Account</p>
+                            <p>@if(userInfo)
+                                {
+                                    {{userInfo?.firstName}}
+                                }
+                                @else {
+                                    My Account
+                                }
+                                </p>
                         </div>
                         <fa-icon [icon]="iconArrowDown"></fa-icon>             
                             <div class="account_choice" [style.display]="isAccountToggled?'inline':'none'" >
@@ -71,9 +78,9 @@
         </div>
         <div class="dashboard_link_container">
             <a routerLink="/home">Home</a>
-            <a>New Arrival</a>
-            <a>Special Offer</a>
-            <a routerLink="about">About Us</a>
+            <a routerLink="/categories">Categories</a>
+            <a routerLink="/special-offer">Special Offer</a>
+            <a routerLink="/about">About Us</a>
         </div>
         <div class="btn_cart" (click)="onCartBtnClick()">
             <div class="btn_cart_logo"><fa-icon [icon]="iconCart"></fa-icon></div>
@@ -85,13 +92,11 @@
         <div class="categories_selector">
             <div><fa-icon [icon]="iconList"></fa-icon> ALL CATEGORIES</div> <fa-icon [icon]="iconSortDown"></fa-icon>
             <div class="categories_container_displayer">
-                <div class="categories_container_item">Categories 1</div>
-                <div class="categories_container_item">Categories 1</div>
-                <div class="categories_container_item">Categories 1</div>
-                <div class="categories_container_item">Categories 1</div>
-                <div class="categories_container_item">Categories 1</div>
-                <div class="categories_container_item">Categories 1</div>
-                <div class="categories_container_item">Categories 1</div>
+                <div class="categories_container_item">Beauty</div>
+                <div class="categories_container_item">Electronic</div>
+                <div class="categories_container_item">Factions</div>
+                <div class="categories_container_item">Furniture</div>
+                <div class="categories_container_item">Outdoor</div>
                 <div class="more_categories_btn">
                     More Categories
                 </div>

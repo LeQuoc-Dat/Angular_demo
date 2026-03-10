@@ -66,7 +66,7 @@ export class AuthService{
     public checkUserRole(expectedRole: string): Observable<boolean>
     {
         return this.authState.user$.pipe(
-            map(user => user.role === expectedRole)
+            map(user => !!user&&user.role === expectedRole)
         )
     }
 }

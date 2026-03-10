@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Sofia');
+
 ::ng-deep * {   
     margin: 0;
     padding: 0;
@@ -49,6 +51,7 @@ button
 
 .body
 {
+  font-family: 'Outfit', sans-serif;
   display: grid;
   grid-template-rows: auto auto 1fr auto;
 }

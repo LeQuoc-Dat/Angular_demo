@@ -65,6 +65,8 @@
     padding: 20px 0;
     cursor: pointer;
     color: var(--text_plain_color);
+    gap: 10px;
+    font-size: 18px;
 }
 
 .home_header_navbar div:hover
@@ -122,7 +124,6 @@
 
 .product_img_display
 {
-    border: 1px solid;
     width: 150px;
     height: 180px;
     margin-bottom: 17px;
@@ -163,6 +164,7 @@
     border: 1px solid var(--line_color);
     align-items: center;
     justify-content: center;
+    gap: 5px;
     cursor: pointer;
 }
 
@@ -176,11 +178,13 @@
 {
     display: flex;
     border: 1px solid var(--line_color);
-    height: 27px;
-    width: 60px;
+    height: 26px;
+    width: 27px;
+    font-size: 15px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    color: var(--highlight_btn_color);
 }
 
 

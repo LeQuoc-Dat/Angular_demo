@@ -1,6 +1,10 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, DestroyRef, inject, ChangeDetectorRef} from '@angular/core';
+import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsService} from '../core/services/products.service'
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
+import {IconList} from '../iconList'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -39,20 +43,25 @@ interface Product
 
 }
 
-
-
 @Component({
   selector: 'app-home',
-  imports: [RouterModule],
+  imports: [RouterModule, FontAwesomeModule, DecimalPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css', '../layout/main-layout/main-layout.component.css'],
 })
 
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   constructor(private products: ProductsService)
   {
     
   }
+
+  public iconList = inject(IconList)
+
+  private destroyRef = inject(DestroyRef)
+  private cdr =  inject(ChangeDetectorRef)
+
+
   cartsList = []
   productsList: Product[] = []
   featuredProductList: Product[] = []
@@ -61,25 +70,19 @@ export class HomeComponent {
   newestProductList: Product[] = []
 
   ngOnInit(): void {
-    
     this.loadProductsList()
-    this.loadCartsList()
-    this.loadFeaturedProduct()
-    this.loadBestSellerProduct()
-    //console.log(this.bestSellerProductList)
-    //console.log(this.featuredProductList)
-    this.loadNewestProduct()
-   
   }
-
-  async loadProductsList()
+    
+  
+  loadProductsList():void
   {
-     this.products.loadAllProduct().subscribe
+     this.products.loadAllProduct().pipe(takeUntilDestroyed(this.destroyRef)).subscribe
     (
       {
         next: (res) =>
         {
           this.productsList = res.products
+          this.loadCartsList()
         },
         error: (err) =>
         {
@@ -92,12 +95,16 @@ export class HomeComponent {
 
   loadCartsList():void
   {
-    this.products.loadCarts().subscribe
+    this.products.loadCarts().pipe(takeUntilDestroyed(this.destroyRef)).subscribe
     (
       {
         next: (res) =>
         {
           this.cartsList = res.carts
+          this.loadDealOfTheDayProduct()
+          this.loadFeaturedProduct()
+          this.loadBestSellerProduct()
+          this.loadNewestProduct()
         },
         error: (err)=>
         {
@@ -134,10 +141,11 @@ export class HomeComponent {
 
     const sortProduct =  [...productMap.entries()].sort((a, b) => b[1].count - a[1].count).map(
       ([id, data ]) => id
-    ).slice(0, 8)
+    ).slice(0, 2)
 
 
-    this.featuredProductList = this.productsList.filter(cart => sortProduct.includes(cart.id))
+    this.featuredProductList = [...this.productsList].filter(cart => sortProduct.includes(cart.id))
+    this.cdr.detectChanges()
   }
 
   loadBestSellerProduct():void
@@ -166,15 +174,24 @@ export class HomeComponent {
 
     const sortProduct =  [...productMap.entries()].sort((a, b) => b[1].quantity - a[1].quantity).map(
       ([id, data ]) => id
-    ).slice(0, 8)
-    this.bestSellerProductList = this.productsList.filter((product)=> sortProduct.includes(product.id))
+    ).slice(0, 2)
+    this.bestSellerProductList = [...this.productsList].filter((product)=> sortProduct.includes(product.id))
+    this.cdr.detectChanges()
   }
 
   loadNewestProduct():void
   {
-    this.newestProductList = this.productsList.sort((a, b) => 
+    this.newestProductList = [...this.productsList].sort((a, b) => 
       new Date(b.meta.createdAt).getDate() - new Date(a.meta.createdAt).getDate()
-  ).slice(0,8)
+  ).slice(0,4)
+    this.cdr.detectChanges()
+  }
+
+  loadDealOfTheDayProduct():void
+  {
+    this.dealOfTheDayProductList = [...this.productsList].sort((a,b) =>
+    (b.discountPercentage) - (a.discountPercentage)).slice(0,2)
+    this.cdr.detectChanges()
   }
 
 }

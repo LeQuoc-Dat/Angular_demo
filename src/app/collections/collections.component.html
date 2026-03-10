@@ -6,12 +6,12 @@
                 <p><a routerLink="/home">Home</a> > <span>Category name</span></p>
             </div>
         </div>
-        <div class="collections_sidebar">
+        <div class="collections_content_wrap"> 
+            <div class="collections_sidebar">
             <div class="shop_by_collections_sibebar">
                 <div class="shop_by_collections_sibebar_header">
                     <h4>SHOP BY</h4>
                 </div>
-                <div class ="shop_by_collections_sibebar_content">
                     <div class="categories_collections_sibebar">
                         <div> <strong>CATEGORIES</strong> </div>
                         <div>Beauty</div>
@@ -20,34 +20,149 @@
                         <div>Furniture</div>
                         <div>Outdoor</div>
                     </div>
-                    <div class="price_filter_collections_sibebar">
-                        <div class="price_filter_collections_sibebar_header">
+                    <div class="filter_collections_sibebar">
+                        <div class="filter_collections_sibebar_header">
                             <strong>PRICE</strong>
                         </div>
-                        <div class="price_filter_collections_sibebar_choices">
+                        <div class="filter_collections_sibebar_choices">
 
                         </div>
                     </div>
-                    <div class="color_filter_collections_sibebar">
-                        <div class="color_filter_collections_sibebar_header">
+                    <div class="filter_collections_sibebar">
+                        <div class="filter_collections_sibebar_header">
                             <strong>COLOR </strong>
                         </div>
 
-                        <div></div>div>
+                        <div class="filter_collections_sibebar_choices">
+                            
+                        </div>
                         
                     </div>
-                    <div class="size_filter_collections_sibebar">
+                    <div class="filter_collections_sibebar">
+                        <div class="filter_collections_sibebar_header">
+                            <strong>SIZE</strong>
+                        </div>
+                        <div class="filter_collections_sibebar_choices">
+
+                        </div>
+                    </div>
+            </div>
+            <div class="best_seller_collections_sibebar">
+                <div class="best_seller_collections_sibebar_header">
+                    <h4>BEST SELLERS</h4>
+                </div>
+                <div class="best_seller_collections_sibebar_content">
+
+                    <div class="best_sellers_item_collections_sibebar_displayer">
+                       <div><p>Product Name</p>
+                        <strong>Product price</strong>
+                        <span></span>
+                    </div> 
+                        <img class="best_sellers_collections_sibebar_img" [src]="" [alt]="">
+                    </div>
+
+                </div>
+            </div>
+            <div class="custom_services_collections_sibebar">
+                <div class="custom_services_collections_sibebar_header">
+                    <h4>CUSTOM SERVICE</h4>
+                </div>
+                <div class="custom_services_collections_sibebar_content">
+                    <div class="service_choices_cointainer_collections_sibebar">
+                        <div class="service_item_collections_sibebar">
+                            <div>
+                                <strong>FREE DELIVERY</strong>
+                                <span>From $59.89</span>
+                            </div>
+                        </div>
+                        <div class="service_item_collections_sibebar">
+                            <div>
+                                <strong>SUPPORT 24/7</strong>
+                                <span>Online 24 hours</span>
+                            </div>
+                            
+                        </div>
+                        <div class="service_item_collections_sibebar">
+                            <div>
+                                <strong>FREE RETURN</strong>
+                                <span>365 a day</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="payment_method_collections_sibebar">
+                        <div>
+                            <strong>PAYMENT METHOD</strong>
+                            <span>Secure payment</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="best_seller_collections_sibebar"></div>
-            <div class="custom_services_collections_sibebar"></div>
             <img class="display_ad_collections_sidebar" [src]="" [alt]="">
 
         </div>
-        <div class="collection_main_content">
-            <div class="collection_header"></div>
-            <div class="collection_product_displayer_container"></div>
+
+           <div class="collections_main_content">
+            <div class="collections_header">
+                <img class = "collections_img_header">
+                <p class="collections_header_intro_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis accusamus excepturi
+                    vitae deserunt ad voluptates perspiciatis inventore odio nulla distinctio aperiam eos
+                    cum, ipsum fugit animi asperiores officiis voluptatem eaque incidunt ex quaerat! Sit,
+                    assumenda. Doloribus, praesentium. Ullam quo quaerat, corrupti ex odio nostrum ipsum 
+                    doloribus possimus culpa, omnis iure.
+                </p>
+                <div class="subcategory_collections_container">
+                    <div class="subcategory_collections_item">
+                        <img class="subcategory_collections_img">
+                        <p>Subcategory name</p>
+                    </div>
+                    <div class="subcategory_collections_item">
+                        <img class="subcategory_collections_img">
+                        <p>Subcategory name</p>
+                    </div>
+                    <div class="subcategory_collections_item">
+                        <img class="subcategory_collections_img">
+                        <p>Subcategory name</p>
+                    </div>
+                    <div class="subcategory_collections_item">
+                        <img class="subcategory_collections_img">
+                        <p>Subcategory name</p>
+                    </div>
+                </div>
+                <div class = "subcategory_collections_tool_container">
+                    <div class="subcategory_collections_toggle_view">
+                        <button>
+                            grid view
+                        </button>
+                        <button>
+                            general view
+                        </button>
+                    </div>
+
+                    <div class="subcategory_collections_sort_item">
+                        <p>Sort By:</p>
+                        <div class="sort_option_selector">
+                            Sort Options
+                        </div>
+                    </div>
+
+                    <span class="collections_product_quantity_display">
+                        0 products
+                    </span>
+                </div>
+            </div>
+            <div class="collection_product_displayer_container">
+                <div class="collection_product_displayer">
+                    <img class = "collection_product_img" [src]="" alt="">
+                    <div>
+                        <p>Product name</p>
+                        <strong> $00.00 <span></span></strong>
+                    </div>
+                </div>
+            </div>
         </div>
+
+        </div>
+  
+     
     </div>
 </div>

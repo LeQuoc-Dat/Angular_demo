@@ -4,11 +4,14 @@ import { AuthService } from './core/services/auth.service'
 import { LoginComponent } from './auth/login/login.component'
 import { HomeComponent } from './home/home.component'
 import { AboutComponent } from './about/about.component'
-import { ProductsComponent } from './products/products.component'
+import { ProductDetailComponent } from './collections/childrens/products/childrens/product-detail/product-detail.component'
 import { CartComponent } from './cart/cart.component'
-import { CategoriesComponent} from './categories/categories.component'
+import { CategoriesComponent} from './collections/childrens/categories/categories.component'
 import { SpecialOfferComponent} from './special-offer/special-offer.component'
-import { CollectionsComponent}from './collections/collections.component'
+import { ProductsChildrenComponent}from './collections/childrens/products/childrens/products-children/products-children.component'
+import { CollectionsComponent} from './collections/collections.component'
+import { ProductsComponent} from './collections/childrens/products/products.component'
+
 
 const authGuard: CanActivateFn = () =>
 {
@@ -74,16 +77,31 @@ export const routes: Routes =[
         canActivate: [authGuard]
     },
     {
-        path: 'products',
-        component: ProductsComponent,
-        title: 'Products',
-        canActivate: [authGuard]
-    },
-    {
-        path: 'categories',
-        component: CategoriesComponent,
-        title: 'Catergories',
-        canActivate: [authGuard]
+        path: 'collections',
+        component: CollectionsComponent,
+        canActivate: [authGuard],
+        children: [
+            {
+                path: '',
+                component: CategoriesComponent,
+                title: 'Collections',
+            },
+            {
+                path: ':category',
+                component: ProductsComponent,
+                children : 
+                [
+                    {
+                        path: '',
+                        component: ProductsChildrenComponent,
+                    },
+                    {
+                        path: ':id/:name',
+                        component: ProductDetailComponent
+                    }
+                ]
+            }
+        ]
     },
     {
         path: 'special-offer',
@@ -91,11 +109,5 @@ export const routes: Routes =[
         title: 'Special Offer',
         canActivate: [authGuard]
     },
-    {
-        path: 'collections',
-        component: CollectionsComponent,
-        title: 'Collections',
-        canActivate: [authGuard]
-    }
     
 ]

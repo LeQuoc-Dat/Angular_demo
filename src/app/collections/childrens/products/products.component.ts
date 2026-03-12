@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
 @Component({
-  selector: 'app-products',
+  selector: 'app-products.component',
   imports: [RouterModule],
   templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css', '../layout/main-layout/main-layout.component.css'],
 })
 export class ProductsComponent {
 

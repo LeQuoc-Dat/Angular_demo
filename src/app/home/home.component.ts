@@ -3,7 +3,7 @@ import { DecimalPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductsService} from '../core/services/products.service'
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
-import {IconList} from '../iconList'
+import {IconList} from '../core/components/icon-list'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 

@@ -18,6 +18,7 @@
   --highlight_line_color: rgb(90, 90, 233);
   --btn_color: rgb(81, 78, 78);
   --highlight_btn_color: red ;
+  --modal_color: rgba(0, 0, 0, 0.788);
 
 
   --config_width: 60rem;
@@ -47,6 +48,7 @@ button
   display: flex;
   justify-content: center;
   background-color: var(--bg_plain_color);
+
 }
 
 .body
@@ -54,6 +56,7 @@ button
   font-family: 'Outfit', sans-serif;
   display: grid;
   grid-template-rows: auto auto 1fr auto;
+  position: relative;
 }
 
 .breadcrumb
@@ -94,4 +97,12 @@ button
   color: var(--text_plain_color);
   text-decoration: line-through;
   font-weight: lighter;
+}
+
+.modal
+{
+  width: 100%;
+  height: 100%;
+  background-color: var(--modal_color);
+  position: absolute;
 }

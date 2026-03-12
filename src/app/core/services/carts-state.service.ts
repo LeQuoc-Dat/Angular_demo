@@ -30,7 +30,7 @@ interface Cart
 export class CartStateService
 {
     cartSubject = new BehaviorSubject<Cart|null>(null)
-    $cart = this.cartSubject.asObservable()
+    public cart$ = this.cartSubject.asObservable()
 
       constructor( @Inject(PLATFORM_ID) private plaformId: Object)
       {

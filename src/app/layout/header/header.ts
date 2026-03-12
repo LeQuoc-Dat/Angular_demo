@@ -7,6 +7,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import {NgStyle} from '@angular/common';
 import {ProductsService} from'../../core/services/products.service'
 import {AuthStateService} from '../../core/services/auth-state.service'
+import {CartStateService} from '../../core/services/carts-state.service'
 
 
 interface user
@@ -22,7 +23,8 @@ interface user
 })
 export class Header implements OnInit{
   constructor(private route: Router, private productService : ProductsService,
-    private authState: AuthStateService
+    private authState: AuthStateService,
+    private cartState: CartStateService
   ){}
 
 
@@ -42,12 +44,15 @@ export class Header implements OnInit{
   isCurrencyToggled = false
 
   userInfo: any = null
+  totalItemsInCart = 0
+  totalPriceInCart=0
 
   private cdr = inject(ChangeDetectorRef)
 
 
   ngOnInit(): void {
     this.loadUserInfo()
+    this.loadNumberItemsInCart()
   }
 
   loadUserInfo()
@@ -59,6 +64,23 @@ export class Header implements OnInit{
    }
    )
   }
+
+  loadNumberItemsInCart()
+  {
+    this.cartState.cart$.subscribe(cart =>
+    {
+      const quanlity = cart?.totalQuantity
+      const price =  cart?.total
+      if (!quanlity || !price)
+      {
+        return
+      }
+      this.totalItemsInCart = quanlity
+      this.totalPriceInCart = price
+    }
+    )
+  }
+
   onCartBtnClick()
   {
     this.route.navigate(['cart'])

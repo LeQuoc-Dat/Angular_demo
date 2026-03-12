@@ -20,28 +20,30 @@
                     </thead>
         
                     <tbody>
+                        @for (product of userCart?.products; track product.id) {
                         <tr>
                             <td>
                                 <div class="product_img_in_cart_container">
-                                    <div class="display_product_img"></div>
+                                    <img class="display_product_img" [src]=product.thumbnail [alt]=product.title>
                                 </div>
                             </td>
                             <td>
                                 <div class="display_product_name_in_cart">
-                                    <p>Product name</p>
+                                    <p>{{product.title}}</p>
                                     <button>Remove</button>
                                 </div>
                             </td>
                             <td>
-                                <b>$00.00</b>
+                                <b>${{product.price}}</b>
                             </td>
                             <td>
-                                <input class="input_quantity_products" type="number" value="1">
+                                <input class="input_quantity_products" type="number" [value]=product.quantity>
                             </td>
                             <td>
-                                <b class="total_products_value_displayer">$00.00</b>
+                                <b class="total_products_value_displayer">${{product.total}}</b>
                             </td>
                         </tr>
+                    }
                     </tbody>
         </table>
         <hr>
@@ -55,7 +57,7 @@
        
          <div class="cart_footer_content_right">
             <div class="subtotal">
-                <p>Subtotal <strong>$374.00</strong> </p>
+                <p>Subtotal <strong>${{userCart?.total}}</strong> </p>
                 <span>Shipping & taxe calculated at check out</span>
             </div>
             <div class="cart_choices_container">

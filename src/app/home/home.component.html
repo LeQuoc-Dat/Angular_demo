@@ -3,6 +3,7 @@
         <div class="home_header">
             <div class="home_header_item_wrap">
                 <div class="home_header_slide">
+                    <img  src="assets/imgs/home_ad.jpg">
                 </div>
                 <div class="home_header_navbar">
                     <div><fa-icon [icon]="iconList.iconTruck"></fa-icon> SHIPPING WORLDWIDE</div>
@@ -29,7 +30,7 @@
                             <p class="product_info">{{product.description}}</p>
                             <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                             <div class="user_choice_container">
-                                <button type="button">
+                                <button type="button" (click)="onCartClick(product.id)">
                                     <fa-icon [icon]="iconList.iconCart"></fa-icon>ADD TO CART
                                 </button>
                                 <div class="wishlist_btn">
@@ -45,9 +46,15 @@
                 </div>
             </div>
             <div class="sale_ad_imgs_container">
-                <div class="sale_ad_imgs_item">Ad1</div>
-                <div class="sale_ad_imgs_item">Ad2</div>
-                <div class="sale_ad_imgs_item">Ad3</div>
+                <div class="sale_ad_imgs_item">  
+                    <img  src="assets/imgs/ad_img_1.jpg">
+                </div>
+                <div class="sale_ad_imgs_item">
+                    <img src="assets/imgs/ad_img_2.jpg">
+                </div>
+                <div class="sale_ad_imgs_item">
+                    <img  src="assets/imgs/ad_img_3.jpg">
+                </div>
             </div>
             <div class="hot_products_container">
                 <div class="hot_products_item">
@@ -63,7 +70,7 @@
                                 <p>{{product.title}}</p>
                                <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                                 <div class="hot_product_user_choice">
-                                    <div class="add_to_cart"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
+                                    <div class="add_to_cart" (click)="onCartClick(product.id)"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
                                     <div class="add_to_wishlist"><fa-icon [icon]="iconList.iconHeart"></fa-icon></div>
                                 </div>
                             </div>
@@ -84,8 +91,8 @@
                                 <img class="product_img_display" [src]=product.images[0] [alt]=product.title>
                                 <p>{{product.title}}</p>
                                 <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
-                                <div class="hot_product_user_choice">
-                                    <div class="add_to_cart"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
+                                <div class="hot_product_user_choice" >
+                                    <div class="add_to_cart" (click)="onCartClick(product.id)" ><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
                                     <div class="add_to_wishlist"><fa-icon [icon]="iconList.iconHeart"></fa-icon></div>
                                 </div>
                             </div>
@@ -96,16 +103,16 @@
             </div>
             <div class="categories_nav_bar">
                 <div class="categories_nav_bar_item">
-                    <p>FURNITURE</p>
+                    <fa-icon [icon]="iconList.iconSofa"></fa-icon><p>FURNITURE</p>
                 </div>
                 <div class="categories_nav_bar_item">
-                    <p>FASION</p>
+                    <fa-icon [icon]="iconList.iconShirt" ></fa-icon><p>FASION</p>
                 </div>
                 <div class="categories_nav_bar_item">
-                     <p>OUTDOOR</p>
+                     <fa-icon [icon]="iconList.iconTree"></fa-icon><p>OUTDOOR</p>
                 </div>
                 <div class="categories_nav_bar_item">
-                     <p>ACCESSORIES</p>
+                     <fa-icon [icon]="iconList.iconTV" ></fa-icon><p>ACCESSORIES</p>
                 </div>
             </div>
             <div class="new_product_conduct_container">
@@ -123,7 +130,7 @@
                             <strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}</strong>
                             <span class="original_price">${{product.price}}</span>
                             <div class="user_choice_container">
-                                <button type="button">
+                                <button type="button" (click)="onCartClick(product.id)">
                                     <fa-icon [icon]="iconList.iconCart"></fa-icon>  Add to cart
                                 </button>
                                 <div class="wishlist_btn">

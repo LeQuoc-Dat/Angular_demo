@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import { Observable, forkJoin, map} from 'rxjs'
-import { response } from 'express'
 
 
 interface requestObj
@@ -25,6 +24,7 @@ export class ProductsService
     private allProductURL = 'https://dummyjson.com/products?limit=0&delay=1000'
     private cartsURL = 'https://dummyjson.com/carts?limit=30&delay=1000'
     private categoriesURL = 'https://dummyjson.com/products/category/'
+    private productURL = 'https://dummyjson.com/products'
     constructor (private http: HttpClient)
     {
     }
@@ -42,5 +42,10 @@ export class ProductsService
         return forkJoin(requestList$).pipe(
             map( res => res.flatMap(item => item.products))
         )
+    }
+
+    public getProductByID(productID: number): Observable<any>
+    {
+        return this.http.get(`${this.productURL}/${productID}`)
     }
 }

@@ -4,7 +4,10 @@ import { RouterModule } from '@angular/router';
 import { ProductsService} from '../core/services/products.service'
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import {IconList} from '../core/components/icon-list'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {CartStateService as CartState} from '../core/services/carts-state.service'
+import { create } from 'domain';
+import { error } from 'console';
 
 
 
@@ -51,7 +54,9 @@ interface Product
 })
 
 export class HomeComponent implements OnInit {
-  constructor(private products: ProductsService)
+  constructor(private products: ProductsService,
+    private cartState: CartState
+  )
   {
     
   }
@@ -62,12 +67,24 @@ export class HomeComponent implements OnInit {
   private cdr =  inject(ChangeDetectorRef)
 
 
+
+  isEditing:boolean = false
   cartsList = []
   productsList: Product[] = []
   featuredProductList: Product[] = []
   bestSellerProductList: Product[] = []
   dealOfTheDayProductList: Product[] = []
   newestProductList: Product[] = []
+  chosenProduct: Product = {id: -1, title: '', description:'', category:'',
+    price:0,discountPercentage:0.00, rating:0, reviews:[],tags: [], images: [],
+    meta: {
+      createdAt:'',
+      updatedAt:'',
+      barcode:'',
+      qrCode:''
+    },
+    stock: 0, minimumOrderQuantity: 0
+  }
 
   ngOnInit(): void {
     this.loadProductsList()
@@ -192,6 +209,23 @@ export class HomeComponent implements OnInit {
     this.dealOfTheDayProductList = [...this.productsList].sort((a,b) =>
     (b.discountPercentage) - (a.discountPercentage)).slice(0,2)
     this.cdr.detectChanges()
+  }
+  onCartClick(productID:number):void
+  {
+    this.products.getProductByID(productID).subscribe(
+      {
+        next: (res) =>
+        {
+          this.chosenProduct = res
+          console.log(this.chosenProduct)
+          this.isEditing=true
+        },
+        error: (err) =>
+        {
+          console.error(err.message)
+        }
+      }
+    ) 
   }
 
 }

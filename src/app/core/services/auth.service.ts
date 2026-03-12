@@ -104,8 +104,15 @@ export class AuthService{
         return this.http.get<UserCartRespone>(`${this.userCartURL}/user/${userID}`).pipe(
             tap(res =>
             {
+                if(res.carts.length===0)
+                {
+                    this.setNewUserCart(userID)
+                    this.cartState.setCart(res.carts[0])
+                }
+                else
+                    {
                 this.cartState.setCart(res.carts[0])
-                console.log(this.cartState.getCart())
+                console.log(this.cartState.getCart())}
             }
             )
         )
@@ -128,6 +135,7 @@ export class AuthService{
             )
         )
     }
+    
 
     public isAuthenticated(): Observable<boolean>
     {

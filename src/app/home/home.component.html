@@ -121,16 +121,16 @@
                     <p class="content_title">NEW PRODUCTS<br>
                     <span class="content_sudtitle">Instant Dismount on instant Purchases</span>
                 </div>
-                <div class="new_product_displayer">
+                <div class="new_product_displayer" >
                     @for (product of newestProductList; track product.id) {
-                    <div class="new_product_displayer_item">
+                    <div class="new_product_displayer_item" (click)="onProductClick()">
                         <img class="product_img_display" [src]=product.images[0]  [alt]=product.title>
                         <div class="display_product_info">
                             <p>{{product.title}}</p>
                             <strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}</strong>
                             <span class="original_price">${{product.price}}</span>
                             <div class="user_choice_container">
-                                <button type="button" (click)="onCartClick(product.id)">
+                                <button type="button" (click)="onCartClick(product.id); $event.stopPropagation()">
                                     <fa-icon [icon]="iconList.iconCart"></fa-icon>  Add to cart
                                 </button>
                                 <div class="wishlist_btn">

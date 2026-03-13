@@ -4,7 +4,7 @@ import {faList, faMagnifyingGlass,
         faCartShopping, faSortDown,
         faAngleDown, faHeart, faUser} from '@fortawesome/free-solid-svg-icons'
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
-import {NgStyle} from '@angular/common';
+import {NgStyle, AsyncPipe, CurrencyPipe} from '@angular/common';
 import {ProductsService} from'../../core/services/products.service'
 import {AuthStateService} from '../../core/services/auth-state.service'
 import {CartStateService} from '../../core/services/carts-state.service'
@@ -17,14 +17,14 @@ interface user
 }
 @Component({
   selector: 'app-header',
-  imports: [FontAwesomeModule, RouterModule, NgStyle],
+  imports: [FontAwesomeModule, RouterModule, NgStyle, AsyncPipe, CurrencyPipe],
   templateUrl: './header.html',
   styleUrls: ['./header.css'],
 })
 export class Header implements OnInit{
   constructor(private route: Router, private productService : ProductsService,
     private authState: AuthStateService,
-    private cartState: CartStateService
+    public cartState: CartStateService
   ){}
 
 

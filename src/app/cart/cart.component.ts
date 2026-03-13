@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject} from '@angular/core';
 import {RouterModule} from '@angular/router'
 import {CartStateService as CartState} from '../core/services/carts-state.service'
+import {ProductsService} from '../core/services/products.service'
+import { CurrencyPipe } from '@angular/common';
 
 
 interface Product
@@ -17,6 +19,7 @@ interface Product
 
 interface Cart
 {
+  id: number,
   userID: number,
   products: Product[],
   total: number,
@@ -26,13 +29,15 @@ interface Cart
 
 @Component({
   selector: 'app-cart',
-  imports: [RouterModule],
+  imports: [RouterModule, CurrencyPipe],
   templateUrl: './cart.component.html',
   styleUrls:['cart.component.css','../layout/main-layout/main-layout.component.css'],
 })
 export class CartComponent implements OnInit {
-  constructor (private cartState: CartState){}
+  constructor (private cartState: CartState, private productService: ProductsService){}
   userCart: Cart|null = null
+
+  private cdr = inject(ChangeDetectorRef)
 
 
   ngOnInit(): void {
@@ -47,11 +52,36 @@ export class CartComponent implements OnInit {
         return
       }
       this.userCart = cart
+      this.cdr.detectChanges()
     }
     )
   }
-  onRemoveClick()
+  onRemoveClick(productID: number)
   {
-    
+    const cartID= this.userCart?.id
+    const products = this.userCart?.products.filter(product => product.id !== productID)
+    if(!cartID || products===undefined)
+    {
+      return
+    }
+    this.productService.updateProductStatus(cartID, products).subscribe(
+      {
+        next: (res) =>
+        {
+          this.cartState.removeItem(productID)
+          this.updateCartStatus()
+          console.log(res)
+        },
+        error: (err) =>
+        {
+          console.log(err.message)
+        }
+
+      }
+    )
+  }
+  onQuantityChange()
+  {
+
   }
 }

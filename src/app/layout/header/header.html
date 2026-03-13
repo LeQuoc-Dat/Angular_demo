@@ -85,7 +85,15 @@
         <div class="btn_cart" (click)="onCartBtnClick()">
             <div class="btn_cart_logo"><fa-icon [icon]="iconCart"></fa-icon></div>
             <div class="btn_cart_status_display"><b>SHOPPING CART</b>
-            <span>{{totalItemsInCart}} item(s) ${{totalPriceInCart}}</span></div>
+            <span>@if(cartState.cart$| async; as cart)
+                {
+                {{totalItemsInCart}} item(s) {{totalPriceInCart | currency: 'USD':'symbol': '1.2-2'}}
+                }
+                @else 
+                {
+                    0 item(s) $0.00
+                }
+                </span></div>
         </div>
     </div>
     <div class ="search_tool_container">

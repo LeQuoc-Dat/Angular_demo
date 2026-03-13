@@ -30,6 +30,7 @@ interface Product
 
 interface Cart
 {
+  id: number
   userID: number,
   products: Product[],
   total: number,
@@ -135,7 +136,7 @@ export class AuthService{
             )
         )
     }
-    
+
 
     public isAuthenticated(): Observable<boolean>
     {

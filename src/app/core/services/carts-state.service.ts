@@ -18,6 +18,7 @@ interface Product
 
 interface Cart
 {
+  id: number,
   userID: number,
   products: Product[],
   total: number,
@@ -54,7 +55,7 @@ export class CartStateService
     {
         return this.cartSubject.value
     }
-    
+
     setCart(cart: Cart)
     {
          if (!isPlatformBrowser(this.plaformId))
@@ -99,10 +100,10 @@ export class CartStateService
         let totalQuantity = 0
         this.cartSubject.value?.products.forEach((product: Product) =>
         {
-            total += product.total
+            total += product.discountedTotal
             totalQuantity += product.quantity
             totalProduct ++
-        }) 
+        })
         const newCart = this.cartSubject.value
         if (newCart)
         {
@@ -127,15 +128,46 @@ export class CartStateService
             {
                 if (product.id ===id)
                 {
-                    return {...product, quantity: quantity}
+                    const updateTotal= product.price*quantity
+                    const updatedDiscountedToTal =  (product.price - product.price*product.discountPercentage/100)*quantity
+                    return {...product, quantity: quantity, total: updateTotal, discountedTotal: updatedDiscountedToTal}
                 }
                 return product
             }
            )
-           this.cartSubject.next({...currentProduct, products: updatedProduct})
+           this.cartSubject.next({...currentProduct, products: updatedProduct, })
            this.updateCartStatus()
            localStorage.setItem('Cart', JSON.stringify(this.cartSubject.value))
         }
+    }
+
+    productQuantityIncr(id: number)
+    {
+      const productIndex = this.cartSubject.value?.products.findIndex(product => product.id === id )
+      if (!productIndex)
+      {
+        return
+      }
+      const currentQuantity = this.cartSubject.value?.products[productIndex].quantity
+      if (!currentQuantity)
+      {
+        return
+      }
+      this.updateProductQuantity(id, currentQuantity + 1)
+    }
+    productQuantityDecr(id: number)
+    {
+       const productIndex = this.cartSubject.value?.products.findIndex(product => product.id === id )
+      if (!productIndex)
+      {
+        return
+      }
+      const currentQuantity = this.cartSubject.value?.products[productIndex].quantity
+      if (!currentQuantity)
+      {
+        return
+      }
+      this.updateProductQuantity(id, currentQuantity - 1)
     }
 
     removeCart()

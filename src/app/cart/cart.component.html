@@ -18,7 +18,7 @@
                                 </th>
                          </tr>
                     </thead>
-        
+
                     <tbody>
                         @for (product of userCart?.products; track product.id) {
                         <tr>
@@ -30,7 +30,7 @@
                             <td>
                                 <div class="display_product_name_in_cart">
                                     <p>{{product.title}}</p>
-                                    <button>Remove</button>
+                                    <button (click)="onRemoveClick(product.id)">Remove</button>
                                 </div>
                             </td>
                             <td>
@@ -48,16 +48,16 @@
         </table>
         <hr>
                 </div>
-            
+
         <div class="cart_footer">
             <div class="cart_footer_content_left">
                 <strong>ADD A NOTE TO YOUR ORDER</strong>
                 <textarea cols="50" rows="5" ></textarea>
             </div>
-       
+
          <div class="cart_footer_content_right">
             <div class="subtotal">
-                <p>Subtotal <strong>${{userCart?.total}}</strong> </p>
+                <p>Subtotal <strong>{{userCart?.total|currency:'USD':'symbol':'1.2-2'}}</strong> </p>
                 <span>Shipping & taxe calculated at check out</span>
             </div>
             <div class="cart_choices_container">

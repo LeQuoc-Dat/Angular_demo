@@ -6,8 +6,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import {IconList} from '../core/components/icon-list'
 import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {CartStateService as CartState} from '../core/services/carts-state.service'
-import { create } from 'domain';
-import { error } from 'console';
+import { EMPTY, lastValueFrom, switchMap, take, tap } from 'rxjs';
 
 
 
@@ -43,6 +42,7 @@ interface Product
   reviews: Review[],
   meta: Meta
   minimumOrderQuantity: number,
+  thumbnail: string
 
 }
 
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
     private cartState: CartState
   )
   {
-    
+
   }
 
   public iconList = inject(IconList)
@@ -76,7 +76,7 @@ export class HomeComponent implements OnInit {
   dealOfTheDayProductList: Product[] = []
   newestProductList: Product[] = []
   chosenProduct: Product = {id: -1, title: '', description:'', category:'',
-    price:0,discountPercentage:0.00, rating:0, reviews:[],tags: [], images: [],
+    price:0,discountPercentage:0.00, rating:0, reviews:[],tags: [], images: [], thumbnail:'',
     meta: {
       createdAt:'',
       updatedAt:'',
@@ -89,8 +89,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.loadProductsList()
   }
-    
-  
+
+
   loadProductsList():void
   {
      this.products.loadAllProduct().pipe(takeUntilDestroyed(this.destroyRef)).subscribe
@@ -198,7 +198,7 @@ export class HomeComponent implements OnInit {
 
   loadNewestProduct():void
   {
-    this.newestProductList = [...this.productsList].sort((a, b) => 
+    this.newestProductList = [...this.productsList].sort((a, b) =>
       new Date(b.meta.createdAt).getDate() - new Date(a.meta.createdAt).getDate()
   ).slice(0,4)
     this.cdr.detectChanges()
@@ -210,6 +210,8 @@ export class HomeComponent implements OnInit {
     (b.discountPercentage) - (a.discountPercentage)).slice(0,2)
     this.cdr.detectChanges()
   }
+
+
   onCartClick(productID:number):void
   {
     this.products.getProductByID(productID).subscribe(
@@ -218,14 +220,68 @@ export class HomeComponent implements OnInit {
         {
           this.chosenProduct = res
           console.log(this.chosenProduct)
-          this.isEditing=true
+          this.updateProdustsCart(this.chosenProduct)
+
         },
         error: (err) =>
         {
           console.error(err.message)
         }
       }
-    ) 
+    )
   }
+
+
+  async updateProdustsCart(product: Product)
+  {
+    this.cartState.cart$.pipe
+    (
+      take(1),
+      switchMap(cart =>
+      {
+        if (!cart)
+          {
+            return EMPTY
+          }
+        
+        if(cart?.products.map(p => p.id).includes(product.id))
+        {
+            this.cartState.productQuantityIncr(product.id)
+            return this.products.updateProductStatus(cart.id, cart.products)
+        }
+        const newProduct = {
+              id: product.id,
+              title: product.title,
+              quantity: 1,
+              price: product.price,
+              discountPercentage: product.discountPercentage,
+              total: product.price,
+              discountedTotal: product.price - product.price*product.discountPercentage/100,
+              thumbnail: product.thumbnail
+            }
+        return this.products.addProductToCart( cart.id ,newProduct).pipe(
+          tap( () => this.cartState.addItemToCart(newProduct))
+        )
+
+      })
+    ).subscribe(
+      {
+        next: (res) =>
+        {
+          console.log(res)
+        },
+        error: (err)=>
+        {
+          console.log(err.message)
+        }
+      }
+    )
+  }
+
+  onProductClick()
+  {
+    console.log('clickA')
+  }
+
 
 }

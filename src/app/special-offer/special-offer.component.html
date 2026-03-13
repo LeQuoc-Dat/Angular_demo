@@ -9,34 +9,40 @@
         <div class="special-off_header">
             <img class="special-off_header_ad_img" src="assets/imgs/banner_sale_img.jpg" >
             <div class="special-offer_product_categories_nav">
-                <div class="categories_nav_item">
+                <div class="categories_nav_item" (click)="filterProduct('all')" 
+                [ngClass]="{'categories_nav_item_selected': isShowAllActive}">
                     SHOW ALL
                     <fa-icon [icon] ="iconList.iconMultiArrows"></fa-icon>
                 </div>
-                <div class="categories_nav_item">
+                <div class="categories_nav_item" (click)="filterProduct('beauty')" 
+                [ngClass]="{'categories_nav_item_selected': isBeautyActive}">
                     BEAUTY
                     <fa-icon [icon]="iconList.iconShopping"></fa-icon>
                 </div>
-                <div class="categories_nav_item">
+                <div class="categories_nav_item" (click)="filterProduct('electronic')"
+                [ngClass]="{'categories_nav_item_selected': isElectronicActive}" >
                     ELECTRONIC
                     <fa-icon [icon]="iconList.iconTV"></fa-icon>
                 </div>
-                <div class="categories_nav_item">
-                    FACTIONS
+                <div class="categories_nav_item" (click)="filterProduct('fashion')"
+                [ngClass]="{'categories_nav_item_selected': isFacshionActive}" >
+                    FASHION
                     <fa-icon [icon]="iconList.iconShirt"></fa-icon> 
                 </div>
-                <div class="categories_nav_item">
+                <div class="categories_nav_item" (click)="filterProduct('furniture')"
+                [ngClass]="{'categories_nav_item_selected': isFurnitureActive}" >
                     FURNITURE
                     <fa-icon [icon]="iconList.iconSofa"></fa-icon> 
                 </div>
-                <div class="categories_nav_item">
+                <div class="categories_nav_item" (click)="filterProduct('outdoor')"
+                [ngClass]="{'categories_nav_item_selected': isOutdoorActive}" >
                     OUTDOOR
                     <fa-icon [icon]="iconList.iconTree"></fa-icon> 
                 </div>
             </div>
         </div>
             <div class="special-offer_content">
-                @for (product of saleProductList; track product.id) {
+                @for (product of displayProducts; track product.id) {
                 <div class="special_offer_product_displayer">
                     <img class="special-offer_product_img" [src]=product.images[0] [alt]=product.title>
                     <div class="special-offer_product_info">

@@ -49,6 +49,17 @@
     font-size: 30px;
 }
 
+.categories_nav_item_selected
+{
+    background-color: var(--highlight_btn_color);
+    color: var(--highlight_text_color);
+}
+
+.categories_nav_item_selected fa-icon
+{
+    color: var(--text_heavy_plain_color);
+}
+
 .categories_nav_item:hover 
 {
     background-color: var(--highlight_btn_color);

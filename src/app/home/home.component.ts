@@ -1,13 +1,12 @@
 import { Component, OnInit, DestroyRef, inject, ChangeDetectorRef} from '@angular/core';
 import { DecimalPipe } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { ProductsService} from '../core/services/products.service'
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
-import {IconList} from '../core/components/icon-list'
-import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {CartStateService as CartState} from '../core/services/carts-state.service'
-import { EMPTY, lastValueFrom, switchMap, take, tap } from 'rxjs';
-
+import { takeUntilDestroyed} from '@angular/core/rxjs-interop'
+import { IconList} from '../core/components/icon-list'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { CartStateService as CartState} from '../core/services/carts-state.service'
+import { EMPTY, switchMap, take, tap } from 'rxjs';
 
 
 interface Meta
@@ -55,7 +54,8 @@ interface Product
 
 export class HomeComponent implements OnInit {
   constructor(private products: ProductsService,
-    private cartState: CartState
+    private cartState: CartState,
+    private router: Router
   )
   {
 
@@ -66,7 +66,11 @@ export class HomeComponent implements OnInit {
   private destroyRef = inject(DestroyRef)
   private cdr =  inject(ChangeDetectorRef)
 
-
+  private beauty:string[] = ['beauty', 'skin-care']
+  private electronic:string[] = ['smartphones','mobile-accessories','tablets','laptops']
+  private fashion: string[] = ['womens-bags','womens-dresses','womens-jewellery','womens-shoes','womens-watches','mens-shirts','mens-shoes','mens-watches']
+  private furniture: string[] =['home-decoration','kitchen-accessories','groceries']
+  private outdoor: string[] = ['vehicle', 'sports-accessories']
 
   isEditing:boolean = false
   cartsList = []
@@ -278,9 +282,31 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  onProductClick()
+  onProductClick(productID:number, productName:string, productCategory:string):void
   {
-    console.log('clickA')
+    let categoriesType = ""
+    if (this.beauty.includes(productCategory))
+    {
+      categoriesType = 'beauty'
+    }
+    if (this.electronic.includes(productCategory))
+    {
+      categoriesType = 'electronic'
+    }
+    if (this.fashion.includes(productCategory))
+    {
+      categoriesType = 'fashion'
+    }
+    if (this.furniture.includes(productCategory))
+    {
+      categoriesType = 'furniture'
+    }
+    if (this.outdoor.includes(productCategory))
+    {
+      categoriesType = 'outdoor'
+    }
+    console.log(productID, productName, categoriesType)
+    this.router.navigate([`/collections/`,categoriesType, productID, productName])
   }
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, DestroyRef, inject, ChangeDetectorRef} from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { ProductsService} from '../core/services/products.service'
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import {IconList} from '../core/components/icon-list'
@@ -50,7 +50,9 @@ interface Product
   styleUrls: ['./special-offer.component.css', '../layout/main-layout/main-layout.component.css'],
 })
 export class SpecialOfferComponent implements OnInit{
-  constructor (private productService: ProductsService){
+  constructor (private productService: ProductsService,
+    private router: Router
+  ){
 
   }
   productList: Product[] = []
@@ -170,5 +172,32 @@ export class SpecialOfferComponent implements OnInit{
         this.isOutdoorActive = false
         break;
     }
+  }
+
+  onProductClick(productID:number, productName:string, productCategory:string):void
+  {
+    let categoriesType = ""
+    if (this.beauty.includes(productCategory))
+    {
+      categoriesType = 'beauty'
+    }
+    if (this.electronic.includes(productCategory))
+    {
+      categoriesType = 'electronic'
+    }
+    if (this.fashion.includes(productCategory))
+    {
+      categoriesType = 'fashion'
+    }
+    if (this.furniture.includes(productCategory))
+    {
+      categoriesType = 'furniture'
+    }
+    if (this.outdoor.includes(productCategory))
+    {
+      categoriesType = 'outdoor'
+    }
+    console.log(productID, productName, categoriesType)
+    this.router.navigate([`/collections/`,categoriesType, productID, productName])
   }
 }

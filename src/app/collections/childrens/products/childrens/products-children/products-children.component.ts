@@ -1,6 +1,6 @@
 import { Component, OnInit, DestroyRef, inject, ChangeDetectorRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterModule, ActivatedRoute} from '@angular/router'
+import { RouterModule, ActivatedRoute, Router} from '@angular/router'
 import { DecimalPipe } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsService} from '../../../../../core/services/products.service'
@@ -37,8 +37,9 @@ interface Product
   tags:string [],
   images: string[],
   reviews: Review[],
-  meta: Meta
+  meta: Meta,
   minimumOrderQuantity: number,
+  availabilityStatus: string,
 }
 
 interface Cart
@@ -76,11 +77,11 @@ export class ProductsChildrenComponent implements OnInit
   trackbarText:string = ''
    
 
-  backup = ['womens-bags','womens-dresses','womens-jewellery','womens-shoes','womens-watches','mens-shirts','mens-shoes','mens-watches']
 
 
-
-  constructor (private productsService: ProductsService, private route: ActivatedRoute)
+  constructor (private productsService: ProductsService, private route: ActivatedRoute,
+    private router: Router
+  )
   {
      const categoryName = this.route.snapshot.paramMap.get('category')
      if(categoryName)
@@ -174,7 +175,6 @@ export class ProductsChildrenComponent implements OnInit
         {
           console.error(err.message)
         }
-
       }
     )
   }
@@ -208,6 +208,33 @@ export class ProductsChildrenComponent implements OnInit
     ).slice(0, 3)
     this.bestSellerProductList = [...this.productsList].filter((product)=> sortProduct.includes(product.id))
     this.cdr.detectChanges()
+  }
+
+  onProductClick(productID:number, productName:string, productCategory:string):void
+  {
+    let categoriesType = ""
+    if (this.beauty.includes(productCategory))
+    {
+      categoriesType = 'beauty'
+    }
+    if (this.electronic.includes(productCategory))
+    {
+      categoriesType = 'electronic'
+    }
+    if (this.fashion.includes(productCategory))
+    {
+      categoriesType = 'fashion'
+    }
+    if (this.furniture.includes(productCategory))
+    {
+      categoriesType = 'furniture'
+    }
+    if (this.outdoor.includes(productCategory))
+    {
+      categoriesType = 'outdoor'
+    }
+    console.log(productID, productName, categoriesType)
+    this.router.navigate([`/collections/`,categoriesType, productID, productName])
   }
 
 

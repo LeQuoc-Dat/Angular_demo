@@ -55,7 +55,7 @@
                     @for(product of bestSellerProductList; track product.id){
 
                     
-                    <div class="best_sellers_item_collections_sibebar_displayer">
+                    <div class="best_sellers_item_collections_sibebar_displayer" (click)="onProductClick(product.id, product.title, product.category)">
                        <div><p>{{product.title}}</p>
                        <strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}
                              </strong>
@@ -157,7 +157,7 @@
             </div>
             <div class="collection_product_displayer_container">
                 @for(product of productsList; track product.id){
-                <div class="collection_product_displayer">
+                <div class="collection_product_displayer" (click)="onProductClick(product.id, product.title, product.category)">
                     <img class = "collection_product_img" [src]=product.images[0] alt=product.title   >
                     <div>
                         <p>{{product.title}}</p>

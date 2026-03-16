@@ -21,7 +21,7 @@
                 </div>
                 <div class="deal_of_the_days_products">
                     @for (product of dealOfTheDayProductList; track product.id) {
-                    <div class="deal_of_the_days_products_display">
+                    <div class="deal_of_the_days_products_display" (click)="onProductClick(product.id, product.title, product.category)">
                         <div class="deal_of_the_days_product_img_area">
                             <img class="product_img_display" [alt]=product.title [src]=product.images[0]>
                         </div>
@@ -30,7 +30,7 @@
                             <p class="product_info">{{product.description}}</p>
                             <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                             <div class="user_choice_container">
-                                <button type="button" (click)="onCartClick(product.id)">
+                                <button type="button" (click)="onCartClick(product.id); $event.stopPropagation()">
                                     <fa-icon [icon]="iconList.iconCart"></fa-icon>ADD TO CART
                                 </button>
                                 <div class="wishlist_btn">
@@ -65,12 +65,12 @@
                     </div>
                     <div class="hot_product_display">
                         @for (product of featuredProductList; track product.id) {
-                            <div class="hot_product_display_item">
+                            <div class="hot_product_display_item" (click)="onProductClick(product.id, product.title, product.category)">
                                 <img class="product_img_display" [src] = product.images[0] [alt]=product.title>
                                 <p>{{product.title}}</p>
                                <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                                 <div class="hot_product_user_choice">
-                                    <div class="add_to_cart" (click)="onCartClick(product.id)"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
+                                    <div class="add_to_cart" (click)="onCartClick(product.id); $event.stopPropagation()"><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
                                     <div class="add_to_wishlist"><fa-icon [icon]="iconList.iconHeart"></fa-icon></div>
                                 </div>
                             </div>
@@ -87,12 +87,12 @@
                     </div>
                     <div class="hot_product_display">
                         @for (product of bestSellerProductList; track product.id) {
-                            <div class="hot_product_display_item">
+                            <div class="hot_product_display_item" (click)="onProductClick(product.id, product.title, product.category)">
                                 <img class="product_img_display" [src]=product.images[0] [alt]=product.title>
                                 <p>{{product.title}}</p>
                                 <p><strong class="product_price">${{(product.price - product.discountPercentage/100*product.price) | number:'1.2-2' }}  <span class="original_price">${{product.price}}</span></strong></p>
                                 <div class="hot_product_user_choice" >
-                                    <div class="add_to_cart" (click)="onCartClick(product.id)" ><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
+                                    <div class="add_to_cart" (click)="onCartClick(product.id); $event.stopPropagation()" ><fa-icon [icon]="iconList.iconCart"></fa-icon></div>
                                     <div class="add_to_wishlist"><fa-icon [icon]="iconList.iconHeart"></fa-icon></div>
                                 </div>
                             </div>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="new_product_displayer" >
                     @for (product of newestProductList; track product.id) {
-                    <div class="new_product_displayer_item" (click)="onProductClick()">
+                    <div class="new_product_displayer_item" (click)="onProductClick(product.id, product.title, product.category)">
                         <img class="product_img_display" [src]=product.images[0]  [alt]=product.title>
                         <div class="display_product_info">
                             <p>{{product.title}}</p>

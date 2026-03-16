@@ -43,7 +43,7 @@
         </div>
             <div class="special-offer_content">
                 @for (product of displayProducts; track product.id) {
-                <div class="special_offer_product_displayer">
+                <div class="special_offer_product_displayer" (click)="onProductClick(product.id, product.title, product.category)">
                     <img class="special-offer_product_img" [src]=product.images[0] [alt]=product.title>
                     <div class="special-offer_product_info">
                         <p>{{product.title}}</p>

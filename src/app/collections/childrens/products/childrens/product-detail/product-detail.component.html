@@ -42,7 +42,7 @@
                             <h3>BEST SELLERS</h3>
                         </div>
                         <div class="best_sellers_container">
-                            @for (item of bestSellerProductList; track item.id) 
+                            @for (item of bestSellerProductList; track $index) 
                             {
                             <div class="best_sellers_item" (click)="onProductClick(item.id, item.title, item.category)">
                                 <div class="best_seller_info">
@@ -194,7 +194,7 @@
                             <h5>RELATED PRODUCTS</h5>
                         </div>
                         <div class="related_products_container">
-                            @for (item of productsList.slice(0,3); track product?.id) {
+                            @for (item of productsList.slice(0,3); track $index) {
                             <div class="related_product_items" (click)="onProductClick(item.id, item.title, item.category)">
                                 <img class="display_related_product_img" [src]="item.images[0]" [alt]="item.title">
                                 <p>{{item?.title}}</p>

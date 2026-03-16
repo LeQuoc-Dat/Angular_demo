@@ -1,10 +1,11 @@
-import { Component, OnInit, DestroyRef, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, DestroyRef, inject, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterModule, ActivatedRoute, Router} from '@angular/router'
 import { CurrencyPipe, NgStyle, NgClass } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsService} from '../../../../../core/services/products.service'
 import { Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 
 interface Meta
@@ -57,22 +58,19 @@ interface Cart
   styleUrls: ['./product-detail.component.css', '../../../../../layout/main-layout/main-layout.component.css'],
   providers: [Title]
 })
-export class ProductDetailComponent implements OnInit{
+export class ProductDetailComponent implements OnInit, OnDestroy{
   constructor(private route: ActivatedRoute,
     private productsService: ProductsService,
     private router: Router
   )
   {
-    const setTitle = this.route.snapshot.paramMap.get('name')
-    if (setTitle)
-    {
-      this.title.setTitle(setTitle)
-    }
+    
   }
 
   private cdr = inject(ChangeDetectorRef)
   private destroyRef = inject(DestroyRef)
   private title = inject(Title)
+  private sub!:Subscription;
 
   private beauty:string[] = ['beauty', 'skin-care']
   private electronic:string[] = ['smartphones','mobile-accessories','tablets','laptops']
@@ -92,12 +90,25 @@ export class ProductDetailComponent implements OnInit{
 
   ngOnInit(): void 
   {
-    this.loadProduct()
+     this.sub = this.route.paramMap.subscribe( param =>
+    {
+       const setTitle = param.get('name')
+      if (setTitle)
+      {
+          this.title.setTitle(setTitle)
+      }
+      const userID = Number(param.get('id'))
+      this.loadProduct(userID)
+    }
+    )
+  }
+  ngOnDestroy(): void {
+    this.sub.unsubscribe()
   }
 
-  loadProduct(): void
+  loadProduct(userID: number): void
   {
-    const userID = Number(this.route.snapshot.paramMap.get('id'))
+    
     this.productsService.getProductByID(userID).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
       {
         next: (res) =>

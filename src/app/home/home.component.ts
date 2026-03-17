@@ -57,9 +57,11 @@ export class HomeComponent implements OnInit {
       createdAt:'',
       updatedAt:'',
       barcode:'',
-      qrCode:''
+      qrCode:'',
+      
     },
-    stock: 0, minimumOrderQuantity: 0
+    stock: 0, minimumOrderQuantity: 0,
+    availabilityStatus: ''
   }
 
   ngOnInit(): void {
@@ -208,20 +210,14 @@ export class HomeComponent implements OnInit {
   }
 
 
-  async updateProdustsCart(product: Product)
-  {
-    this.cartState.cart$.pipe
-    (
+  async updateProdustsCart(product: Product) {
+    this.cartState.cart$.pipe(
       take(1),
-      switchMap(cart =>
-      {
-        if (!cart)
-          {
+      switchMap(cart => {
+        if (!cart){
             return EMPTY
           }
-        
-        if(cart?.products.map(p => p.id).includes(product.id))
-        {
+        if(cart?.products.map(p => p.id).includes(product.id)){
             this.cartState.productQuantityIncr(product.id)
             return this.products.updateProductStatus(cart.id, cart.products)
         }

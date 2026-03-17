@@ -22,19 +22,15 @@ interface Product
   thumbnail: string,
 }
 
-@Injectable(
-    {
+@Injectable({
         providedIn: 'root'
-    }
-)
+    })
 
 export class ProductsService {
     private cartsURL = 'https://dummyjson.com/carts'
     private productURL = 'https://dummyjson.com/products'
 
-    constructor (private http: HttpClient)
-    {
-    }
+    constructor (private http: HttpClient){}
 
     public loadAllProduct():Observable<any>{
         return this.http.get(`${this.productURL}?limit=0&delay=1000`)

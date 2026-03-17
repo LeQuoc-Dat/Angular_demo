@@ -6,48 +6,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductsService} from '../../../../../core/services/products.service'
 import { Title } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-
-
-interface Meta
-{
-  createdAt: string,
-  updatedAt: string,
-  barcode: string,
-  qrCode: string
-
-}
-interface Review
-{
-  rating: number,
-  comment: string,
-  date:string,
-  reviewerName: string,
-  reviewerEmail: string
-
-}
-interface Product
-{
-  id: number,
-  title: string,
-  description: string,
-  category: string,
-  price: number,
-  discountPercentage: number,
-  rating: number,
-  stock: number,
-  tags:string [],
-  images: string[],
-  reviews: Review[],
-  meta: Meta
-  minimumOrderQuantity: number,
-  availabilityStatus: string,
-}
-
-interface Cart
-{
-  id: number,
-  products: Product[]
-}
+import {Product} from '../../../../../shared/models/products.model'
+import { Cart } from '../../../../../shared/models/carts.model';
 
 
 
@@ -244,27 +204,21 @@ export class ProductDetailComponent implements OnInit, OnDestroy{
     this.cdr.detectChanges()
   }
 
-   loadProductsList(category: string[]):void
-    {
-      if(category.length===0)
-      {
+   loadProductsList(category: string[]):void{
+      if(category.length===0){
         return
       }
-      this.productsService.loadProductByCategory(category).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
-        {
-          next: (res) =>
-          {
+      this.productsService.loadProductByCategory(category).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+          next: (res) =>{
             this.productsList = res
             this.loadCartsList()
             this.cdr.detectChanges()
           },
-          error: (err) =>
-          {
+          error: (err) => {
             console.error(err.message)
           }
         }
-      )
-    }
+      )}
 
     onProductClick(productID:number, productName:string, productCategory:string):void
   {

@@ -27,5 +27,6 @@ export interface Product{
   reviews: Review[],
   meta: Meta
   minimumOrderQuantity: number,
-  thumbnail: string
+  thumbnail: string,
+  availabilityStatus: string,
 }

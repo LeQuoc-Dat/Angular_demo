@@ -6,8 +6,8 @@ import {faList, faMagnifyingGlass,
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome'
 import {NgStyle, AsyncPipe, CurrencyPipe} from '@angular/common';
 import {ProductsService} from'../../core/services/products.service'
-import {AuthStateService} from '../../core/services/auth-state'
-import {CartStateService} from '../../core/services/carts-state'
+import {AuthStateService} from '../../core/states/auth.state'
+import {CartStateService} from '../../core/states/carts.state'
 
 
 interface user

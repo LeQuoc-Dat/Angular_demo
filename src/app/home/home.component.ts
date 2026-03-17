@@ -5,7 +5,7 @@ import { ProductsService} from '../core/services/products.service'
 import { takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import { IconList} from '../core/components/icon-list'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CartStateService as CartState} from '../core/services/carts-state'
+import { CartStateService as CartState} from '../core/states/carts.state'
 import { EMPTY, switchMap, take, tap } from 'rxjs';
 import { Product} from '../shared/models/products.model'
 

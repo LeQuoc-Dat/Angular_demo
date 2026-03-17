@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject} from '@angular/core';
 import { RouterModule} from '@angular/router'
-import { CartStateService} from '../core/services/carts-state'
+import { CartStateService} from '../core/states/carts.state'
 import { ProductsService} from '../core/services/products.service'
 import { CurrencyPipe } from '@angular/common';
 import { Cart} from '../shared/models/carts.model'; 

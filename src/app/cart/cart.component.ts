@@ -1,31 +1,10 @@
-import { Component, OnInit, ChangeDetectorRef, inject} from '@angular/core';
-import {RouterModule} from '@angular/router'
-import {CartStateService as CartState} from '../core/services/carts-state.service'
-import {ProductsService} from '../core/services/products.service'
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, inject} from '@angular/core';
+import { RouterModule} from '@angular/router'
+import { CartStateService} from '../core/services/carts-state'
+import { ProductsService} from '../core/services/products.service'
 import { CurrencyPipe } from '@angular/common';
-
-
-interface Product
-{
-  id: number,
-  title: string,
-  price: number,
-  quantity: number,
-  total: number,
-  discountPercentage: number,
-  discountedTotal: number,
-  thumbnail: string,
-}
-
-interface Cart
-{
-  id: number,
-  userID: number,
-  products: Product[],
-  total: number,
-  totalProducts: number,
-  totalQuantity: number,
-}
+import { Cart} from '../shared/models/carts.model'; 
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -33,16 +12,24 @@ interface Cart
   templateUrl: './cart.component.html',
   styleUrls:['cart.component.css','../layout/main-layout/main-layout.component.css'],
 })
-export class CartComponent implements OnInit {
-  constructor (private cartState: CartState, private productService: ProductsService){}
+export class CartComponent implements OnInit, OnDestroy {
+
+  constructor (
+    private cartState: CartStateService,
+    private productService: ProductsService
+  ){}
+  
   userCart: Cart|null = null
-
   private cdr = inject(ChangeDetectorRef)
-
-
+  sud!: Subscription;
   ngOnInit(): void {
     this.updateCartStatus()
   }
+
+  ngOnDestroy(): void {
+    this.sud.unsubscribe()
+  }
+
   updateCartStatus():void
   {
     this.cartState.cart$.subscribe(cart =>
@@ -56,6 +43,7 @@ export class CartComponent implements OnInit {
     }
     )
   }
+
   onRemoveClick(productID: number)
   {
     const cartID= this.userCart?.id
@@ -64,24 +52,18 @@ export class CartComponent implements OnInit {
     {
       return
     }
-    this.productService.updateProductStatus(cartID, products).subscribe(
-      {
+    const productSub = this.productService.updateProductStatus(cartID, products).subscribe({
         next: (res) =>
         {
           this.cartState.removeItem(productID)
           this.updateCartStatus()
-          console.log(res)
         },
         error: (err) =>
         {
-          console.log(err.message)
         }
 
       }
     )
-  }
-  onQuantityChange()
-  {
-
+    this.sud.add(productSub)
   }
 }

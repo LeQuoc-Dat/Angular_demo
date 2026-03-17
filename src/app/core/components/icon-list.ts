@@ -2,7 +2,7 @@ import {faHeart , faEnvelopeOpen} from  '@fortawesome/free-regular-svg-icons'
 import {faCartShopping, faTruck, faShirt,
      faMoneyBill1, faUmbrella, faTv,
      faCouch, faTree, faBagShopping,
-     faArrowsUpDownLeftRight
+     faArrowsUpDownLeftRight, faSpinner
     } from '@fortawesome/free-solid-svg-icons'
 import { Injectable } from '@angular/core'
 
@@ -25,4 +25,5 @@ export class IconList
     public iconTree = faTree
     public iconShopping = faBagShopping
     public iconMultiArrows = faArrowsUpDownLeftRight
+    public iconLoading = faSpinner
 }

@@ -72,6 +72,18 @@
                 <button class="btn_sign_up" type="button">SIGN UP</button>
             </div>
         </form>
+        @if (isLoading)
+        {
+            <div class="popup_layout">
+                <div class="loading_popup">
+                    <div class="pop_up_header">Login...</div>
+                    <div class="pop_up_animation">
+                        <fa-icon [icon]="iconList.iconLoading"></fa-icon>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
+    
 
   

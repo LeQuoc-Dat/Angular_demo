@@ -5,44 +5,16 @@ import { ProductsService} from '../core/services/products.service'
 import { takeUntilDestroyed} from '@angular/core/rxjs-interop'
 import { IconList} from '../core/components/icon-list'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { CartStateService as CartState} from '../core/services/carts-state.service'
+import { CartStateService as CartState} from '../core/services/carts-state'
 import { EMPTY, switchMap, take, tap } from 'rxjs';
+import { Product} from '../shared/models/products.model'
 
-
-interface Meta
-{
-  createdAt: string,
-  updatedAt: string,
-  barcode: string,
-  qrCode: string
-
-}
-interface Review
-{
-  rating: number,
-  comment: string,
-  date:string,
-  reviewerName: string,
-  reviewerEmail: string
-
-}
-interface Product
-{
-  id: number,
-  title: string,
-  description: string,
-  category: string,
-  price: number,
-  discountPercentage: number,
-  rating: number,
-  stock: number,
-  tags:string [],
-  images: string[],
-  reviews: Review[],
-  meta: Meta
-  minimumOrderQuantity: number,
-  thumbnail: string
-
+enum CategoryType {
+  Beauty = 'beauty',
+  Electronic = 'electronic',
+  Fashion = 'fashion',
+  Furniture = 'furniture',
+  Outdoor = 'outdoor',
 }
 
 @Component({
@@ -282,30 +254,16 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  onProductClick(productID:number, productName:string, productCategory:string):void
-  {
-    let categoriesType = ""
-    if (this.beauty.includes(productCategory))
-    {
-      categoriesType = 'beauty'
+  onProductClick(productID:number, productName:string, productCategory:string):void{
+    const categoryMap: Record<CategoryType, string[]> = {
+        [CategoryType.Beauty]: this.beauty,
+        [CategoryType.Electronic]: this.electronic,
+        [CategoryType.Fashion]: this.fashion,
+        [CategoryType.Furniture]: this.furniture,
+        [CategoryType.Outdoor]: this.outdoor,
     }
-    if (this.electronic.includes(productCategory))
-    {
-      categoriesType = 'electronic'
-    }
-    if (this.fashion.includes(productCategory))
-    {
-      categoriesType = 'fashion'
-    }
-    if (this.furniture.includes(productCategory))
-    {
-      categoriesType = 'furniture'
-    }
-    if (this.outdoor.includes(productCategory))
-    {
-      categoriesType = 'outdoor'
-    }
-    console.log(productID, productName, categoriesType)
+    const categoriesType = (Object.entries(categoryMap) as [CategoryType, string[]][])
+    .find(([_, categories]) => categories.includes(productCategory))?.[0] ?? '';
     this.router.navigate([`/collections/`,categoriesType, productID, productName])
   }
 

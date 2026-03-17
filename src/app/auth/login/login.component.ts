@@ -2,6 +2,8 @@ import {Component, inject} from '@angular/core';
 import {AuthService} from '../../core/services/auth.service'
 import {NgForm} from '@angular/forms'
 import {Router} from '@angular/router';
+import {IconList} from '../../core/components/icon-list'
+
 
 
 
@@ -12,11 +14,16 @@ import {Router} from '@angular/router';
   standalone:false
 })
 export class LoginComponent {
+
+  isLoading = false
+  iconList = inject(IconList)
   private router= inject(Router)
   private authService = inject(AuthService)
-  onLogin(form: NgForm):void
+  async onLogin(form: NgForm)
   {
-    if(form.invalid)
+    this.isLoading= true
+    try {
+      if(form.invalid)
     {
       return;
     }
@@ -32,6 +39,13 @@ export class LoginComponent {
           alert('Login failed: username or password is incorrect!')
         }
       })
+    }
+    catch(error:any)
+    {
+      console.log(error)
+    }
+    this.isLoading=false
+    
   }
 
   controlHasError(validation_1: string,validation_2: string, controlName: string, form: NgForm)

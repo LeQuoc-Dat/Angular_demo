@@ -11,18 +11,17 @@ import { SpecialOfferComponent} from './special-offer/special-offer.component'
 import { ProductsChildrenComponent}from './collections/childrens/products/childrens/products-children/products-children.component'
 import { CollectionsComponent} from './collections/collections.component'
 import { ProductsComponent} from './collections/childrens/products/products.component'
+import { map } from 'rxjs'
 
 
 const authGuard: CanActivateFn = () =>
 {
     const auth = inject(AuthService)
     const router = inject(Router)
-    if (!auth.isAuthenticated())
-    {
-        return router.createUrlTree(['login'])
-    }
 
-    return true
+    return auth.isAuthenticated().pipe(
+        map((isAuth:boolean) => isAuth? true: router.createUrlTree(['login']))
+    )
 }
 
 
@@ -40,6 +39,7 @@ const roleGuard: CanActivateFn = (route: ActivatedRouteSnapshot) =>
     {
         return false
     }
+    console.log('true')
     return true
 
 }

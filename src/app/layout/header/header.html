@@ -54,7 +54,7 @@
                         </div>
                         <fa-icon [icon]="iconArrowDown"></fa-icon>             
                             <div class="account_choice" [style.display]="isAccountToggled?'inline':'none'" >
-                                <div>
+                                <div (click)="onLogOutClick()">
                                     Log out
                                 </div>
                                 
@@ -100,13 +100,13 @@
         <div class="categories_selector">
             <div><fa-icon [icon]="iconList"></fa-icon> ALL CATEGORIES</div> <fa-icon [icon]="iconSortDown"></fa-icon>
             <div class="categories_container_displayer">
-                <div class="categories_container_item">Beauty</div>
-                <div class="categories_container_item">Electronic</div>
-                <div class="categories_container_item">Factions</div>
-                <div class="categories_container_item">Furniture</div>
-                <div class="categories_container_item">Outdoor</div>
-                <div class="more_categories_btn">
-                    <a routerLink="/collections">More Categories</a>
+                <div class="categories_container_item" (click)="onCategoriesClick('beauty')">Beauty</div>
+                <div class="categories_container_item" (click)="onCategoriesClick('electronic')">Electronic</div>
+                <div class="categories_container_item" (click)="onCategoriesClick('fashion')">Factions</div>
+                <div class="categories_container_item" (click)="onCategoriesClick('furniture')">Furniture</div>
+                <div class="categories_container_item" (click)="onCategoriesClick('outdoor')">Outdoor</div>
+                <div class="more_categories_btn" (click)="onCategoriesClick('')">
+                   More Categories
                 </div>
             </div>
         </div>

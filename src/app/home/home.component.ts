@@ -309,5 +309,17 @@ export class HomeComponent implements OnInit {
     this.router.navigate([`/collections/`,categoriesType, productID, productName])
   }
 
+   onCategoriesClick(categoryName: string)
+  {
+    if(categoryName==='')
+    {
+      this.router.navigate(['collections'])
+    }
+    else
+    {
+      this.router.navigate(['/collections', categoryName])
+    }
+  }
+ 
 
 }

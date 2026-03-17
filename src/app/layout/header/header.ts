@@ -22,7 +22,7 @@ interface user
   styleUrls: ['./header.css'],
 })
 export class Header implements OnInit{
-  constructor(private route: Router, private productService : ProductsService,
+  constructor(private router: Router, private productService : ProductsService,
     private authState: AuthStateService,
     public cartState: CartStateService
   ){}
@@ -83,7 +83,7 @@ export class Header implements OnInit{
 
   onCartBtnClick()
   {
-    this.route.navigate(['cart'])
+    this.router.navigate(['cart'])
   }
 
 
@@ -100,6 +100,25 @@ export class Header implements OnInit{
   {
     this.isCountryToggled = false;
     this.isCurrencyToggled = !this.isCurrencyToggled
+  }
+
+   onLogOutClick()
+  {
+    this.authState.removeUserInfo()
+    this.authState.clearToken()
+    console.log(this.authState.getToken())
+    this.router.navigate(['login'])
+  }
+  onCategoriesClick(categoryName: string)
+  {
+    if(categoryName==='')
+    {
+      this.router.navigate(['collections'])
+    }
+    else
+    {
+      this.router.navigate(['/collections', categoryName])
+    }
   }
   
 }

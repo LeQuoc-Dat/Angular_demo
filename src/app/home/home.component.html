@@ -102,16 +102,16 @@
                 </div>
             </div>
             <div class="categories_nav_bar">
-                <div class="categories_nav_bar_item">
+                <div class="categories_nav_bar_item" (click)="onCategoriesClick('furniture')">
                     <fa-icon [icon]="iconList.iconSofa"></fa-icon><p>FURNITURE</p>
                 </div>
-                <div class="categories_nav_bar_item">
+                <div class="categories_nav_bar_item" (click)="onCategoriesClick('fashion')">
                     <fa-icon [icon]="iconList.iconShirt" ></fa-icon><p>FASION</p>
                 </div>
-                <div class="categories_nav_bar_item">
+                <div class="categories_nav_bar_item" (click)="onCategoriesClick('outdoor')">
                      <fa-icon [icon]="iconList.iconTree"></fa-icon><p>OUTDOOR</p>
                 </div>
-                <div class="categories_nav_bar_item">
+                <div class="categories_nav_bar_item"(click)="onCategoriesClick('electronic')">
                      <fa-icon [icon]="iconList.iconTV" ></fa-icon><p>ACCESSORIES</p>
                 </div>
             </div>

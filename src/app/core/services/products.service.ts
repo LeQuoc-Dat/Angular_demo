@@ -1,28 +1,16 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {Observable, forkJoin, map} from 'rxjs'
+import { Product } from '../../shared/models/carts.model'
 
-interface requestObj
-{
+interface requestObj {
     products: any[]
     limit: number
     skip: number
     total: number
 }
 
-interface Product
-{
-  id: number,
-  title: string,
-  price: number,
-  quantity: number,
-  total: number,
-  discountPercentage: number,
-  discountedTotal: number,
-  thumbnail: string,
-}
-
-@Injectable({
+@Injectable ({
         providedIn: 'root'
     })
 

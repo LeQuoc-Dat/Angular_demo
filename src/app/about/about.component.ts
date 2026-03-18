@@ -7,6 +7,4 @@ import { RouterModule } from '@angular/router';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css', '../layout/main-layout/main-layout.component.css'],
 })
-export class AboutComponent {
-
-}
+export class AboutComponent {}

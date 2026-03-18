@@ -38,10 +38,13 @@
     "@fortawesome/angular-fontawesome": "^4.0.0",
     "@fortawesome/free-regular-svg-icons": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@ngrx/effects": "^21.0.1",
+    "@ngrx/store": "^21.0.1",
     "express": "^5.1.0",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "@ngrx/store-devtools": "^21.0.1"
   },
   "devDependencies": {
     "@angular/build": "^21.1.4",
@@ -49,6 +52,9 @@
     "@angular/compiler-cli": "^21.1.0",
     "@angular/material": "^21.2.2",
     "@fortawesome/angular-fontawesome": "^4.0.0",
+    "@ngrx/effects": "^21.0.1",
+    "@ngrx/store": "^21.0.1",
+    "@ngrx/store-devtools": "^21.0.1",
     "@types/express": "^5.0.1",
     "@types/node": "^20.17.19",
     "jsdom": "^27.1.0",

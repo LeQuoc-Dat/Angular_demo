@@ -1,14 +1,5 @@
 import { Routes} from '@angular/router'
 import { LoginComponent } from './auth/login/login.component'
-import { HomeComponent } from './home/home.component'
-import { AboutComponent } from './about/about.component'
-import { ProductDetailComponent } from './collections/childrens/products/childrens/product-detail/product-detail.component'
-import { CartComponent } from './cart/cart.component'
-import { CategoriesComponent} from './collections/childrens/categories/categories.component'
-import { SpecialOfferComponent} from './special-offer/special-offer.component'
-import { ProductsChildrenComponent}from './collections/childrens/products/childrens/products-children/products-children.component'
-import { CollectionsComponent} from './collections/collections.component'
-import { ProductsComponent} from './collections/childrens/products/products.component'
 import { authGuard} from './shared/guard/auth.guard'
 
 export const routes: Routes =[ {
@@ -23,43 +14,45 @@ export const routes: Routes =[ {
     },
     {
         path:'home',
-        component: HomeComponent,
+        loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
         title: 'Home',
         canActivate: [authGuard]
     },
     {
         path:'about',
-        component: AboutComponent,
+        loadComponent: () => import('./about/about.component').then((m) => m.AboutComponent),
         title: 'About Us',
         canActivate: [authGuard]
     },
     {
         path:'cart',
-        component: CartComponent,
+        loadComponent: ()=> import('./cart/cart.component').then((m) => m.CartComponent),
         title: 'Cart',
         canActivate: [authGuard]
     },
     {
         path: 'collections',
-        component: CollectionsComponent,
+        loadComponent: ()=> import('./collections/collections.component').then((m)=> m.CollectionsComponent),
         canActivate: [authGuard],
         children: [ {
                 path: '',
-                component: CategoriesComponent,
+                loadComponent: ()=> import('./collections/childrens/categories/categories.component').then((m)=> m.CategoriesComponent),
                 title: 'Collections',
             },
             {
                 path: ':category',
-                component: ProductsComponent,
+                loadComponent: ()=> import('./collections/childrens/products/products.component').then((m)=> m.ProductsComponent),
                 children : 
                 [
                     {
                         path: '',
-                        component: ProductsChildrenComponent,
+                        loadComponent: ()=> import('./collections/childrens/products/childrens/products-children/products-children.component')
+                        .then((m)=> m.ProductsChildrenComponent),
                     },
                     {
                         path: ':id/:name',
-                        component: ProductDetailComponent
+                        loadComponent: ()=> import('./collections/childrens/products/childrens/product-detail/product-detail.component')
+                        .then((m)=> m.ProductDetailComponent),
                     }
                 ]
             }
@@ -67,7 +60,7 @@ export const routes: Routes =[ {
     },
     {
         path: 'special-offer',
-        component: SpecialOfferComponent,
+         loadComponent: ()=> import('./special-offer/special-offer.component').then((m)=> m.SpecialOfferComponent),
         title: 'Special Offer',
         canActivate: [authGuard]
     },

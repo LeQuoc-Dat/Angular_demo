@@ -240,11 +240,9 @@ export class HomeComponent implements OnInit {
       {
         next: (res) =>
         {
-          console.log(res)
         },
         error: (err)=>
         {
-          console.log(err.message)
         }
       }
     )
